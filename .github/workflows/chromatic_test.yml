@@ -33,12 +33,12 @@ jobs:
 #         token: ${{ secrets.JYG_GIT_REPO_TOKEN }}
           #token: ${{ github.event.pull_request.head.sha }}
 #         workingDir: jyg-village-hall
-          exitOnceUploaded: true
-          onlyChanged: true
-          traceChanged: true
-          buildScriptName: build-storybook
-          exitZeroOnChanges: true
-          diagnostics: true
+     #     exitOnceUploaded: true
+    #      onlyChanged: true
+   #       traceChanged: true
+#          buildScriptName: build-storybook
+ #         exitZeroOnChanges: true
+  #        diagnostics: true
 #     if: contains(github.event.pull_request.labels.*.name, 'storybook')
 
     outputs:
