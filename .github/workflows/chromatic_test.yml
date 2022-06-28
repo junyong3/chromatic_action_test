@@ -1,15 +1,16 @@
 name: chromatic
 
 on:
-  workflow_dispatch:
-    inputs:
-      sha:
-        description: 'The SHA-1 hash referring to the commit to check.'
-        required: true
-      ref:
-        description: 'The head branch associated with the pull request.'
-        default: 'main'
-        required: true
+  push
+#   workflow_dispatch:
+#     inputs:
+#       sha:
+#         description: 'The SHA-1 hash referring to the commit to check.'
+#         required: true
+#       ref:
+#         description: 'The head branch associated with the pull request.'
+#         default: 'main'
+#         required: true
 # on:
 #   pull_request_target:
 #     types: [labeled]
