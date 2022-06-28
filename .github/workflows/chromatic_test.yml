@@ -8,7 +8,7 @@ on:
         required: true
       ref:
         description: 'The head branch associated with the pull request.'
-        default: 'develop'
+        default: 'main'
         required: true
 # on:
 #   pull_request_target:
@@ -40,15 +40,15 @@ jobs:
           exitZeroOnChanges: true
           diagnostics: true
 #     if: contains(github.event.pull_request.labels.*.name, 'storybook')
-    
+
     outputs:
       storybookUrl: 'https://62a8139452cf51cb687f08eb-shczcsfmsp.chromatic.com/?path=/story/yookgak-introduction--page'
-          
 
-          
-          
-          
-          
-          
-          
-          
+
+
+
+
+
+
+
+
