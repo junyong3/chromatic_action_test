@@ -1,0 +1,6 @@
+export { ReactComponent as Alarm } from './Icon/Alarm.svg'
+export { ReactComponent as Check } from './Icon/Check.svg'
+export { ReactComponent as EmptyBox } from './Icon/EmptyBox.svg'
+export { ReactComponent as Dark } from './Icon/icon-moon.svg'
+export { ReactComponent as Light } from './Icon/icon-sun.svg'
+export { ReactComponent as ErrorSign } from './Icon/ErrorSign.svg'
