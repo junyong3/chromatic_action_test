@@ -11,7 +11,7 @@ const Template: Story<ErrorFallbackProps> = (args: ErrorFallbackProps) => {
     if (!isRecovered) {
       throw new Error()
     }
-    return <Center>다시 데이터를 불러왔습니다.</Center>
+    return <Center>다시 데이터를 불러왔습니다!!.</Center>
   }
   return (
     <div
