@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
       - name: Install dependencies
         run: npm ci
-       - name: demo Storybook
+      - name: demo Storybook
         run: npm run httpDemoStorybook
 #      - name: Publish to Chromatic
 #        uses: chromaui/action@v1
