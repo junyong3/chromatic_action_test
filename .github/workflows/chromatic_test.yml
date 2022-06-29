@@ -1,15 +1,17 @@
 name: chromatic
 
 on:
-  workflow_dispatch:
-    inputs:
-      sha:
-        description: 'The SHA-1 hash referring to the commit to check.'
-        required: true
-      ref:
-        description: 'The head branch associated with the pull request.'
-        default: 'main'
-        required: true
+  push
+#on:
+#  workflow_dispatch:
+#    inputs:
+#      sha:
+#        description: 'The SHA-1 hash referring to the commit to check.'
+#        required: true
+#      ref:
+#        description: 'The head branch associated with the pull request.'
+#        default: 'develop'
+#        required: true
 # on:
 #   pull_request_target:
 #     types: [labeled]
@@ -26,22 +28,20 @@ jobs:
           fetch-depth: 0
       - name: Install dependencies
         run: npm ci
-      - name: demo Storybook
-        run: npm run httpDemoStorybook
-#      - name: Publish to Chromatic
-#        uses: chromaui/action@v1
-#        with:
-#          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
-##         token: ${{ secrets.JYG_GIT_REPO_TOKEN }}
-#          #token: ${{ github.event.pull_request.head.sha }}
-##         workingDir: jyg-village-hall
-#          exitOnceUploaded: true
-#          onlyChanged: true
-#          traceChanged: true
-#          buildScriptName: build-storybook
-#          exitZeroOnChanges: true
-#          diagnostics: true
-##     if: contains(github.event.pull_request.labels.*.name, 'storybook')
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
+#         token: ${{ secrets.JYG_GIT_REPO_TOKEN }}
+          #token: ${{ github.event.pull_request.head.sha }}
+#         workingDir: jyg-village-hall
+          exitOnceUploaded: true
+          onlyChanged: true
+          traceChanged: true
+          buildScriptName: build-storybook
+          exitZeroOnChanges: true
+          diagnostics: true
+#     if: contains(github.event.pull_request.labels.*.name, 'storybook')
 
     outputs:
       storybookUrl: 'https://62a8139452cf51cb687f08eb-shczcsfmsp.chromatic.com/?path=/story/yookgak-introduction--page'
