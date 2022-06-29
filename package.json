@@ -10,7 +10,9 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token"
+    "chromatic": "npx chromatic --project-token",
+    "httpDemoStorybook": "npx http-server storybook-static"
+
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
