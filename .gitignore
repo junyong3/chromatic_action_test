@@ -25,7 +25,7 @@ dist-ssr
 !/.eslintrc.json
 
 # storybook
-storybook-static
+#storybook-static
 
 
 #ts
