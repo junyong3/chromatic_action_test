@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { BrowserRouter } from 'react-router-dom'
 import { queryClient } from '@queries/client'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import React from 'react'
 import { QueryClientProvider } from 'react-query'
 
 const DefaultViewport = {

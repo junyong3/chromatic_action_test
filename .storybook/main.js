@@ -12,17 +12,17 @@ module.exports = {
     '@storybook/addon-interactions',
     // '@storybook/addon-actions',
   ],
-  webpackFinal: async (config) => ({
-    ...config,
-    resolve: {
-      ...config.resolve,
-      alias: {
-        ...config.resolve.alias,
-        // '@': path.resolve(__dirname, '../src/'),
-        // '@emotion/core': toPath('node_modules/@emotion/react'),
-      },
-    },
-  }),
+  // webpackFinal: async (config) => ({
+  //   ...config,
+  //   resolve: {
+  //     ...config.resolve,
+  //     alias: {
+  //       ...config.resolve.alias,
+  //       // '@': path.resolve(__dirname, '../src/'),
+  //       // '@emotion/core': toPath('node_modules/@emotion/react'),
+  //     },
+  //   },
+  // }),
   viteFinal: async (config, { configType }) => {
     config.resolve.alias = [
       {
