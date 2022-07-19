@@ -1,7 +1,9 @@
 name: chromatic
 
 on:
-  push
+  push:
+    branches:
+      - main
 #on:
 #  workflow_dispatch:
 #    inputs:
