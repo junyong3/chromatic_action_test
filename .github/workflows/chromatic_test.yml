@@ -40,7 +40,7 @@ jobs:
             ${{ runner.OS }}-
 
       - name: cache-hit-output
-        run: echo "::set-output cache-hit:: ${{steps.cache-modules.outputs.cache-hit}}"
+        run: echo "::set-output cache-hit ${{steps.cache-modules.outputs.cache-hit}}"
 
       - name: install dependencies
         if: steps.cache-modules.outputs.cache-hit != 'true'
