@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache-modules
         with:
           # node_modules라는 폴더를 검사하여
