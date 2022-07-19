@@ -31,7 +31,7 @@ jobs:
 
       - name: cache node modules
         uses: actions/cache@v3
-        id: cache-modules
+        id: cache
         with:
           # node_modules라는 폴더를 검사하여
           path: node_modules
@@ -42,10 +42,10 @@ jobs:
 #            ${{ runner.OS }}-
 
       - name: cache-hit-output
-        run: echo "set-output cache-hit ${{steps.cache-modules.outputs.cache-hit}} hit"
+        run: echo "set-output cache-hit ${{steps.cache.outputs}} hit"
 
       - name: install dependencies
-        if: steps.cache-modules.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm install
 #      - name: demo Storybook
 #        run: npm run httpDemoStorybook
