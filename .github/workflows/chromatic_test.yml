@@ -45,7 +45,7 @@ jobs:
 
       - name: install dependencies
         if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: npm run install
+        run: npm install
 #      - name: demo Storybook
 #        run: npm run httpDemoStorybook
       - name: Publish to Chromatic
