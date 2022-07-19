@@ -34,7 +34,7 @@ jobs:
         id: cache
         with:
           # node_modules라는 폴더를 검사하여
-          path: node_modules
+          path: ./node_modules
           # 아래 키값으로 cache가 돼있는지 확인
           key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
 #          restore-keys: |
@@ -45,7 +45,7 @@ jobs:
         run: echo "set-output cache-hit ${{steps.cache.outputs}} hit"
 
       - name: install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != true
         run: npm install
 #      - name: demo Storybook
 #        run: npm run httpDemoStorybook
