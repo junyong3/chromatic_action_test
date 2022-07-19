@@ -36,9 +36,9 @@ jobs:
           path: node_modules
           # 아래 키값으로 cache가 돼있는지 확인
           key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-packages-
-            ${{ runner.OS }}-
+#          restore-keys: |
+#            ${{ runner.OS }}-build-packages-
+#            ${{ runner.OS }}-
 
       - name: cache-hit-output
         run: echo "::set-output cache-hit ${{steps.cache-modules.outputs.cache-hit}} key cache-hit"
