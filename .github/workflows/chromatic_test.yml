@@ -29,27 +29,22 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: cache node modules
-#        uses: actions/cache@v3
-#        id: cache
-#        with:
-#          # node_modules라는 폴더를 검사하여
-#          path: ./node_modules
-#          # 아래 키값으로 cache가 돼있는지 확인
-#          key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
-##          restore-keys: |
-##            ${{ runner.OS }}-build-packages-
+      - name: cache node modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: /node_modules
+          key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.OS }}-build-packages-
 #            ${{ runner.OS }}-
-      - uses: actions/setup-node@v3
-      - run: npm ci
-      - run: npm test
 
       - name: cache-hit-output
         run: echo "set-output cache-hit ${{steps.cache.outputs.cache-hit}} hit"
 
-#      - name: install dependencies
-#        if: steps.cache.outputs.cache-hit != 'true'
-#        run: npm install
+      - name: install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
 #      - name: demo Storybook
 #        run: npm run httpDemoStorybook
 #      - name: Publish to Chromatic
