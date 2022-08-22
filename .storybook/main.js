@@ -57,6 +57,9 @@ module.exports = {
         projects: [path.resolve(path.dirname(__dirname), '', 'tsconfig.json')],
       }),
     ]
+    config.build.minify = false
+    config.build.sourcemap = false
+
     return config
   },
   framework: '@storybook/react',
