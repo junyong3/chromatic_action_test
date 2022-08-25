@@ -46,7 +46,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm install
 
-#      - name: demo Storybook
+#      - name: demo Storybook1
 #        run: npm run httpDemoStorybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
