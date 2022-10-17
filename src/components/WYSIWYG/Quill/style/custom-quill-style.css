@@ -1,0 +1,14 @@
+
+.ql-snow .ql-tooltip[data-mode=urlImage]::before {
+    content: "Enter link:";
+}
+.ql-snow .ql-tooltip[data-mode=urlImage] {
+        top: 0 !important;
+        left: 14px !important;
+}
+
+.ql-editor{
+    /*min-height: 300px !important;*/
+    /*max-height: 400px;*/
+    overflow: auto;
+}

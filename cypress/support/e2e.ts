@@ -1,0 +1,6 @@
+import 'cypress-localstorage-commands'
+import './commands/dataCy'
+import './commands/login'
+import './commands/changePassword'
+import './commands/sampleCommand1'
+import './commands/sampleCommand2'
