@@ -6,3 +6,9 @@ export interface ErrorFallbackProps
     Partial<FallbackProps> {
   withoutIcon?: boolean
 }
+
+export type ErrorByTypeViewProps = {
+  type: 'NETWORK_ERROR' | 'UNAUTHORIZED' | 'ERROR'
+  code?: number
+  clickHandler?: () => void
+}

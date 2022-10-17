@@ -1,7 +1,6 @@
 import { Story, Meta } from '@storybook/react'
-import Checkbox from '@components/Checkbox/Checkbox'
-import { CheckboxProps } from '@components/Checkbox/Props'
-import { CheckboxListWarp } from '@components/Checkbox/StyleObj'
+import Checkbox from '@components/Checkbox/BaseCheckbox'
+import { BaseCheckboxProps } from '@components/Checkbox/Props'
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder'
 import Favorite from '@mui/icons-material/Favorite'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
@@ -10,40 +9,40 @@ import AndroidIcon from '@mui/icons-material/Android'
 import AppleIcon from '@mui/icons-material/Apple'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import { FlexWrap } from '../StyleObj'
 
-const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
+const Template: Story<BaseCheckboxProps> = (args: BaseCheckboxProps) => {
   return (
-    <CheckboxListWarp>
-      <div className={'checkbox-card'}>
+    <FlexWrap>
+      <div>
         <Checkbox
           {...args}
           icon={<AppleIcon />}
           checkedIcon={<AndroidIcon />}
         />
       </div>
-      <div className={'checkbox-card'}>
+      <div>
         <Checkbox
           {...args}
           icon={<BookmarkBorderIcon />}
           checkedIcon={<BookmarkIcon />}
         />
       </div>
-      <div className={'checkbox-card'}>
+      <div>
         <Checkbox
           {...args}
           icon={<FavoriteBorder />}
           checkedIcon={<Favorite />}
         />
       </div>
-      <div className={'checkbox-card'}>
+      <div>
         <Checkbox
           {...args}
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon />}
         />
       </div>
-      <div className={'checkbox-card'}></div>
-    </CheckboxListWarp>
+    </FlexWrap>
   )
 }
 export default {

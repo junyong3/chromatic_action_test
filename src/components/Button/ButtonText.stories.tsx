@@ -1,47 +1,46 @@
 import { Story, Meta } from '@storybook/react'
 import Button from '@components/Button/Button'
 import { ButtonProps } from '@components/Button/Props'
-import { ButtonListWarp } from '@components/Button/StyleObj'
 import AddIcon from '@mui/icons-material/Add'
-import React from 'react'
+import { FlexWrap } from '../StyleObj'
 
 const Template: Story<ButtonProps> = (args: ButtonProps) => {
   return (
-    <ButtonListWarp>
-      <div className={'button-card'}>
+    <FlexWrap flexBasis="100px">
+      <div>
         <Button {...args}>controls</Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'small'}>
           Small
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'medium'}>
           Medium
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'large'}>
           Large
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'medium'} disabled>
           disabled
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'medium'} color={'error'}>
           color
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button {...args} size={'medium'} color={'gray'}>
           color
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button
           {...args}
           size={'medium'}
@@ -51,7 +50,7 @@ const Template: Story<ButtonProps> = (args: ButtonProps) => {
           icon
         </Button>
       </div>
-      <div className={'button-card'}>
+      <div>
         <Button
           {...args}
           size={'medium'}
@@ -63,7 +62,7 @@ const Template: Story<ButtonProps> = (args: ButtonProps) => {
           href
         </Button>
       </div>
-    </ButtonListWarp>
+    </FlexWrap>
   )
 }
 export default {

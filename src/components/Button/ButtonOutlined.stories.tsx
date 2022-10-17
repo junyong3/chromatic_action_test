@@ -1,13 +1,12 @@
 import { Story, Meta } from '@storybook/react'
 import Button from '@components/Button/Button'
 import { ButtonProps } from '@components/Button/Props'
-import { ButtonListWarp } from '@components/Button/StyleObj'
 import AddIcon from '@mui/icons-material/Add'
-import React from 'react'
+import { FlexWrap } from '../StyleObj'
 
 const Template: Story<ButtonProps> = (args: ButtonProps) => {
   return (
-    <ButtonListWarp>
+    <FlexWrap flexBasis="100px">
       <div className={'button-card'}>
         <Button {...args}>controls</Button>
       </div>
@@ -63,7 +62,7 @@ const Template: Story<ButtonProps> = (args: ButtonProps) => {
           href
         </Button>
       </div>
-    </ButtonListWarp>
+    </FlexWrap>
   )
 }
 export default {

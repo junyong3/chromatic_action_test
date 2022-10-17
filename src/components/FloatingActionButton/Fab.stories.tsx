@@ -1,40 +1,30 @@
 import { Story, Meta } from '@storybook/react'
 import Fab from '@components/FloatingActionButton/Fab'
 import { FabProps } from '@components/FloatingActionButton/Props'
-import { FabListWarp } from '@components/FloatingActionButton/StyleObj'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { FlexWrap } from '../StyleObj'
 
 const Template: Story<FabProps> = (args: FabProps) => {
   return (
-    <FabListWarp>
-      <div className={'fab-card'}>
-        <Fab {...args}>
-          <AddIcon />
-        </Fab>
-      </div>
-      <div className={'fab-card'}>
-        <Fab {...args} color={'secondary'}>
-          <EditIcon />
-        </Fab>
-      </div>
-      <div className={'fab-card'}>
-        <Fab {...args} disabled>
-          <FavoriteIcon />
-        </Fab>
-      </div>
-      <div className={'fab-card'}>
-        <Fab {...args} color={'secondary'} size={'small'}>
-          <EditIcon />
-        </Fab>
-      </div>
-      <div className={'fab-card'}>
-        <Fab {...args} disabled size={'medium'}>
-          <FavoriteIcon />
-        </Fab>
-      </div>
-    </FabListWarp>
+    <FlexWrap>
+      <Fab {...args}>
+        <AddIcon />
+      </Fab>
+      <Fab {...args} color={'secondary'}>
+        <EditIcon />
+      </Fab>
+      <Fab {...args} disabled>
+        <FavoriteIcon />
+      </Fab>
+      <Fab {...args} color={'secondary'} size={'small'}>
+        <EditIcon />
+      </Fab>
+      <Fab {...args} disabled size={'medium'}>
+        <FavoriteIcon />
+      </Fab>
+    </FlexWrap>
   )
 }
 export default {

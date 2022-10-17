@@ -1,4 +1,4 @@
-export type msgKeyMap = 'noRowMsg' | 'noMsg'
+export type msgKeyMap = 'noRowMsg' | 'noMsg' | 'noResponseData'
 
 export type NoDataBoundaryPops = {
   dataSet: any

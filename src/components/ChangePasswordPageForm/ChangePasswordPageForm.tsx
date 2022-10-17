@@ -1,38 +1,26 @@
 import React, { ChangeEvent, useState } from 'react'
 import styled from '@emotion/styled'
 import Button from '@components/Button'
-import TextField from '@components/TextField'
+import BaseTextField from '@components/TextField'
 import LoadingService from '@services/LoadingService'
 import { Alert } from '@mui/material'
-import { AuthChangePasswordRequestDto } from '@api/dto/auth.changePassword.request.dto'
-import { useMutationChangePassword } from '@queries/auth/useMutation.changePassword'
+import { ChangePasswordReq } from '@api/model/IAM/changePassword'
 import ErrorCode from '@api/NetworkService/errorCode'
 import { useNavigate } from 'react-router-dom'
 import { To } from '@routes/To'
 import { useAuthStore } from '@stores/auth.store'
-import {
-  FailureData,
-  INVALID_PARAMETERS_CODE,
-} from '@api/dto/auth.changePassword.response.dto'
 import SnackbarService from '@services/SnackbarService'
-
-const INVALID_PASSWORD_ERROR_MESSAGE =
-  '영소문자, 숫자, 특수문자를 포함한 8자리 이상의 문자를 입력해 주세요'
-const NO_SAME_CONFIRM_PASSWORD_ERROR_MESSAGE =
-  '위의 비밀번호와 동일하게 입력해 주세요.'
-const UNAUTHORIZED_SUBMIT_ERROR_MESSAGE = '입력한 정보가 일치하지 않습니다.'
-const NO_RECENTLY_USED_PASSWORD_ERROR_MESSAGE =
-  '현재 비밀번호와 다른 비밀번호를 입력해 주세요.'
-const NOT_EMAIL_ERROR_MESSAGE = '이메일과 다른 비밀번호를 입력해 주세요.'
-
-// Minimum Length : 8
-// Lowercase Characters(영소문자) : 1
-// Digits(숫자) : 1
-// Special Characters(특수문자) : 1
-const REGEXP = /^(?=.*[a-z])(?=.*[!@#$%^*+=-])(?=.*\d)/
+import { IAMErrorRes } from '@api/model/IAMRes'
+import { AxiosError } from 'axios'
+import { MSG } from '@constants/MessageCode/msg'
+import { INVALID_PARAMETERS_CODE } from '@api/model/IAM/changePassword'
+import { useMutationWrap } from '@queries/useMutation'
+import NetworkService from '@api/NetworkService'
+import { IAM_API_PATH } from '@api/path/IAM/iamPath'
+import { REGEXP } from '@src/constants/REGEXP'
 
 function ChangePasswordPageForm() {
-  const { mutate: changePassword } = useMutationChangePassword()
+  const { mutate } = useMutationWrap()
   const navigate = useNavigate()
 
   const loggedEmail = useAuthStore((state) => state.loggedEmail)
@@ -85,36 +73,45 @@ function ChangePasswordPageForm() {
     setNumOfLoginFailure(0)
     setIsFailedKeycloak(false)
 
-    const changePasswordRequestDto: AuthChangePasswordRequestDto = {
+    const changePasswordParams: ChangePasswordReq = {
       username: temporallyStoredEmailForChangingPassword || loggedEmail,
-      password: password,
-      new_password: newPassword,
-      confirmation: confirmNewPassword,
-      otpcode: otp,
+      password,
+      newPassword,
+      otp,
     }
 
-    changePassword(changePasswordRequestDto, {
-      onSuccess: ({ success, code, data }) => {
-        if (success) {
-          if (temporallyStoredEmailForChangingPassword) {
-            setTemporallyStoredEmailForChangingPassword(null)
-            SnackbarService.show(
-              '비밀번호가 변경되었습니다. 변경된 비밀번호로 재로그인해 주세요.'
-            )
-            navigate(To.Login)
-          } else {
-            SnackbarService.show('비밀번호가 변경되었습니다.')
-            navigate(To.Home)
+    mutate(
+      NetworkService.iam.post<ChangePasswordReq>(
+        IAM_API_PATH.CHANGE_PASSWORD,
+        changePasswordParams
+      ),
+      {
+        onSuccess: ({ success }) => {
+          if (success) {
+            if (temporallyStoredEmailForChangingPassword) {
+              setTemporallyStoredEmailForChangingPassword(null)
+              SnackbarService.show(
+                '비밀번호가 변경되었습니다. 변경된 비밀번호로 재로그인해 주세요.'
+              )
+              navigate(To.Login)
+            } else {
+              SnackbarService.show('비밀번호가 변경되었습니다.')
+              navigate(To.Home)
+            }
           }
-        } else {
-          let numFailures = 0
+        },
+        onError: ({ response }: AxiosError<IAMErrorRes<any>>) => {
+          const code = response?.data?.code
+          const data = response?.data?.data
+
+          let failureCount = 0
 
           switch (code) {
             case ErrorCode.ACCESS_DENIED:
-              numFailures = (data as FailureData)?.num_failures
+              failureCount = data?.signInFailureCount
 
-              if (numFailures) {
-                setNumOfLoginFailure(numFailures)
+              if (failureCount) {
+                setNumOfLoginFailure(failureCount)
               }
               break
             case ErrorCode.ACCESS_DENIED_ACCOUNT_DISABLE:
@@ -132,13 +129,7 @@ function ChangePasswordPageForm() {
                 data === INVALID_PARAMETERS_CODE.NOT_EMAIL
               ) {
                 setIsNotEmail(true)
-              } else if (
-                data === INVALID_PARAMETERS_CODE.PASSWORD_MINIMUM_LENGTH ||
-                data === INVALID_PARAMETERS_CODE.PASSWORD_MISMATCH ||
-                data === INVALID_PARAMETERS_CODE.AT_LEAST_ONE_LOWER_CASE ||
-                data === INVALID_PARAMETERS_CODE.AT_LEAST_ONE_NUMERIC ||
-                data === INVALID_PARAMETERS_CODE.AT_LEAST_ONE_SPECIAL_CHARACTER
-              ) {
+              } else {
                 setIsFailedKeycloak(true)
               }
               break
@@ -147,12 +138,12 @@ function ChangePasswordPageForm() {
               setIsFailedKeycloak(true)
               break
           }
-        }
-      },
-      onSettled: () => {
-        LoadingService.close()
-      },
-    })
+        },
+        onSettled: () => {
+          LoadingService.close()
+        },
+      }
+    )
   }
 
   const onChangePassword = (
@@ -164,7 +155,7 @@ function ChangePasswordPageForm() {
   const onChangeNewPassword = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (!REGEXP.test(e.currentTarget.value)) {
+    if (!REGEXP.USER_PASSWORD.test(e.currentTarget.value)) {
       setIsInvalidNewPwd(true)
     } else {
       setIsInvalidNewPwd(false)
@@ -185,43 +176,54 @@ function ChangePasswordPageForm() {
     setConfirmNewPassword(e.currentTarget.value)
   }
 
-  const isEnabledButton = password && newPassword && confirmNewPassword && otp
-  // &&
-  // !isInvalidNewPwd &&
-  // !isNoSameConfirmPwd
+  const isEnabledButton =
+    password &&
+    newPassword &&
+    confirmNewPassword &&
+    otp &&
+    !isInvalidNewPwd &&
+    !isNoSameConfirmPwd
 
   return (
     <form onSubmit={handleSubmit}>
       <Input
+        size={'medium'}
         label="현재 비밀번호"
+        data-cy={'password'}
         type="password"
         value={password}
         onChange={onChangePassword}
         fullWidth
       />
       <Input
+        size={'medium'}
         label="새 비밀번호"
+        data-cy={'newPassword'}
         type="password"
         value={newPassword}
         onChange={onChangeNewPassword}
         fullWidth
         error={isInvalidNewPwd}
-        helperText={isInvalidNewPwd ? INVALID_PASSWORD_ERROR_MESSAGE : ''}
+        helperText={isInvalidNewPwd ? MSG.ERROR.INVALID_PASSWORD : ''}
       />
       <Input
+        size={'medium'}
         label="새 비밀번호 확인"
+        data-cy={'newPasswordConfirm'}
         type="password"
         value={confirmNewPassword}
         onChange={onChangeConfirmNewPassword}
         fullWidth
         error={isNoSameConfirmPwd}
         helperText={
-          isNoSameConfirmPwd ? NO_SAME_CONFIRM_PASSWORD_ERROR_MESSAGE : ''
+          isNoSameConfirmPwd ? MSG.ERROR.NO_SAME_CONFIRM_PASSWORD : ''
         }
       />
 
       <Input
+        size={'medium'}
         label="OTP 인증번호"
+        data-cy={'otp'}
         inputProps={{ maxLength: 6 }}
         value={otp}
         onChange={handleChangeOtp}
@@ -230,28 +232,30 @@ function ChangePasswordPageForm() {
 
       {(isInvalidParameters ||
         (numOfLoginFailure > 0 && numOfLoginFailure < 5)) && (
-        <Alert sx={{ mt: 1.5 }} severity="error">
-          {UNAUTHORIZED_SUBMIT_ERROR_MESSAGE}
+        <Alert data-cy={'alert'} sx={{ mt: 1.5 }} severity="error">
+          {MSG.ERROR.UNAUTHORIZED_SUBMIT}
         </Alert>
       )}
 
       {isNotRecentlyUsed && (
         <Alert sx={{ mt: 1.5 }} severity="error">
-          {NO_RECENTLY_USED_PASSWORD_ERROR_MESSAGE}
+          {MSG.ERROR.NO_RECENTLY_USED_PASSWORD}
         </Alert>
       )}
 
       {isNotEmail && (
         <Alert sx={{ mt: 1.5 }} severity="error">
-          {NOT_EMAIL_ERROR_MESSAGE}
+          {MSG.ERROR.NOT_EMAIL}
         </Alert>
       )}
 
       <SubmitButton
         type="submit"
+        data-cy={'submit'}
         variant="contained"
         fullWidth
         disabled={!isEnabledButton}
+        data-sb-kind={'pages/Home'}
       >
         비밀번호 변경
       </SubmitButton>
@@ -259,7 +263,7 @@ function ChangePasswordPageForm() {
   )
 }
 
-const Input = styled(TextField)`
+const Input = styled(BaseTextField)`
   & + & {
     margin-top: 12px;
   }

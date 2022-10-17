@@ -16,3 +16,9 @@ export const NoDataBoundaryWrap = styled.div`
   flex-direction: column;
   background-color: beige;
 `
+
+export const BoundaryItem = styled.div`
+  width: 280px;
+  height: 250px;
+  background-color: #d8d8d8;
+`

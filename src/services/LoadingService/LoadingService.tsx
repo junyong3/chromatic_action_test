@@ -1,28 +1,38 @@
 import { Backdrop, CircularProgress } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useRootVariables } from '@stores/rootVariables.store'
+import shallow from 'zustand/shallow'
 
-let _setIsOpen_: React.Dispatch<React.SetStateAction<boolean>>
+// let _setIsOpen_: React.Dispatch<React.SetStateAction<null | boolean>>
 
-export const LoadingProvider = React.memo(function LoadingProvider() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    _setIsOpen_ = setIsOpen
-  }, [setIsOpen])
+export const LoadingProvider = () => {
+  // const [isOpen, setIsOpen] = useState<null | boolean>(false)
+  const isLoading = useRootVariables((state) => state.loadingState, shallow)
+  // useLayoutEffect(() => {
+  //   console.log(3213123)
+  //   _setIsOpen_ = setIsOpen
+  // }, [])
 
   return (
-    <Backdrop open={isOpen} sx={{ backgroundColor: '#FFFFFFB3', zIndex: 9999 }}>
+    <Backdrop
+      open={isLoading}
+      sx={{ backgroundColor: '#FFFFFFB3', zIndex: 9999 }}
+    >
       <CircularProgress />
     </Backdrop>
   )
-})
+}
 
 const LoadingService = {
   show: () => {
-    _setIsOpen_(true)
+    useRootVariables.setState({
+      loadingState: true,
+    })
   },
   close: () => {
-    _setIsOpen_(false)
+    useRootVariables.setState({
+      loadingState: false,
+    })
   },
 }
 

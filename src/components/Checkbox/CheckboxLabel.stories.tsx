@@ -1,19 +1,18 @@
 import { Story, Meta } from '@storybook/react'
-import Checkbox from '@components/Checkbox/Checkbox'
-import { CheckboxProps } from '@components/Checkbox/Props'
-import { CheckboxListWarp } from '@components/Checkbox/StyleObj'
-import React from 'react'
+import Checkbox from '@components/Checkbox/BaseCheckbox'
+import { BaseCheckboxProps } from '@components/Checkbox/Props'
 import FormGroup from '@components/FormGroup'
 import FormControlLabel from '@components/FormControlLabel'
+import { FlexWrap } from '../StyleObj'
 
-const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
+const Template: Story<BaseCheckboxProps> = (args: BaseCheckboxProps) => {
   return (
-    <CheckboxListWarp>
+    <FlexWrap>
       <FormGroup>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel control={<Checkbox {...args} />} label={'체크'} />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Checkbox {...args} checked={true} color={'secondary'} />}
             label={'왼쪽'}
@@ -21,7 +20,7 @@ const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
             labelPlacement={'start'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Checkbox {...args} size={'small'} />}
             label={'위'}
@@ -29,7 +28,7 @@ const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
             labelPlacement={'top'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Checkbox {...args} size={'medium'} />}
             label={'오른쪽'}
@@ -37,7 +36,7 @@ const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
             labelPlacement={'end'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Checkbox {...args} size={'medium'} />}
             label={'아래'}
@@ -46,7 +45,7 @@ const Template: Story<CheckboxProps> = (args: CheckboxProps) => {
           />
         </div>
       </FormGroup>
-    </CheckboxListWarp>
+    </FlexWrap>
   )
 }
 export default {

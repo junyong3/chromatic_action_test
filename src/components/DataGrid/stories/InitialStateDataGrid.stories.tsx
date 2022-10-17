@@ -36,6 +36,9 @@ const Template: Story<DataGridProps> = (args: DataGridProps) => {
   )
 }
 export default {
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
   title: 'components/MUI/DataGrid',
   component: DataGrid,
   argTypes: {

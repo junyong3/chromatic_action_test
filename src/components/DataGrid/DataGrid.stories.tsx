@@ -32,6 +32,9 @@ const Template: Story<DataGridProps> = (args: DataGridProps) => {
   )
 }
 export default {
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
   title: 'components/MUI/DataGrid',
   component: DataGrid,
   argTypes: {
@@ -61,6 +64,7 @@ Default.args = {
   disableExtendRowFullWidth: false,
   hideFooter: false,
   hideFooterSelectedRowCount: false,
+  toolBar: true,
 
   // getRowClassName: (params) => {
   //   console.log(params)

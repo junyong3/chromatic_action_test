@@ -11,9 +11,10 @@ const useDummyQuery = () => {
   const { data }: UseQueryResult<dummyDataTs[], Error> = useQuery<
     dummyDataTs[],
     Error
-  >(['Suspense'], () => fetchList<dummyDataTs>(10000), {
+  >(['Suspense'], () => fetchList<dummyDataTs>(3000), {
     refetchOnWindowFocus: true,
     suspense: true,
+    useErrorBoundary: true,
   })
 
   return data ?? []

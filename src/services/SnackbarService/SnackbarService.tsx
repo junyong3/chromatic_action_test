@@ -22,6 +22,7 @@ export const SnackbarProvider = React.memo(function SnackbarProvider() {
   return (
     <Snackbar
       open={!!message}
+      data-cy={'snackbar'}
       autoHideDuration={6000}
       onClose={handleClose}
       message={message}

@@ -66,7 +66,11 @@ export async function deleteById(targetId: number) {
   })
 }
 // dummyData 전체를 호출합니다.
-export async function fetchList<T>(timer?: number): Promise<T[]> {
+export async function fetchList<T>(
+  timer?: number,
+  isErrorCall?: boolean
+): Promise<T[]> {
+  if (isErrorCall) throw new Error()
   return toAsyncAPI<T>(() => dummyData, timer)
 }
 

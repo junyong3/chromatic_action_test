@@ -1,15 +1,15 @@
 import { Story, Meta } from '@storybook/react'
 import JIcon from './JIcon'
 import { JIconProps } from '@components/JIcon/JIcon'
-import { IconListWarp } from '@components/JIcon/StyleObj'
+import { FlexWrap } from '../StyleObj'
 
 const Template: Story<JIconProps> = (args: JIconProps) => {
   const clickHandle = () => {
     console.log('click')
   }
   return (
-    <IconListWarp>
-      <div className={'icon-card'}>
+    <FlexWrap flexBasis="100px">
+      <div>
         <JIcon
           {...args}
           name={'Light'}
@@ -19,19 +19,19 @@ const Template: Story<JIconProps> = (args: JIconProps) => {
           onClick={() => clickHandle()}
         />
       </div>
-      <div className={'icon-card'}>
+      <div>
         <JIcon {...args} name={'Dark'} />
       </div>
-      <div className={'icon-card'}>
+      <div>
         <JIcon {...args} name={'Alarm'} fill={'black'} />
       </div>
-      <div className={'icon-card'}>
+      <div>
         <JIcon {...args} name={'EmptyBox'} />
       </div>
-      <div className={'icon-card'}>
+      <div>
         <JIcon {...args} name={'Check'} />
       </div>
-    </IconListWarp>
+    </FlexWrap>
   )
 }
 export default {

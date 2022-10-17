@@ -9,9 +9,9 @@ const Template: Story<ErrorFallbackProps> = (args: ErrorFallbackProps) => {
   const [isRecovered, setIsRecovered] = useState(false)
   const Child = ({ isRecovered }: { isRecovered: boolean }): JSX.Element => {
     if (!isRecovered) {
-      throw new Error()
+      console.error('error')
     }
-    return <Center>다시 데이터를 불러왔습니다!!.</Center>
+    return <Center>다시 데이터를 불러왔습니다.</Center>
   }
   return (
     <div

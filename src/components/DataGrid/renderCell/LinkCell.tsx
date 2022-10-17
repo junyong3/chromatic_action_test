@@ -1,5 +1,5 @@
 import { Link } from '@mui/material'
-import React from 'react'
+import React, { HTMLAttributeAnchorTarget } from 'react'
 import { GridRenderCellParams } from '@mui/x-data-grid'
 
 type LinkCellProps<T> = {
@@ -7,15 +7,26 @@ type LinkCellProps<T> = {
   onCellClick?: (row: GridRenderCellParams<T>) => void
   title?: string
   href?: string
+  sbKind?: string
+  target?: HTMLAttributeAnchorTarget
 }
 
 function LinkCell<T>(props: LinkCellProps<T>) {
-  const { cellInfo, onCellClick, title, href } = props
+  const {
+    cellInfo,
+    onCellClick,
+    title,
+    href,
+    sbKind = 'pages/Home',
+    target = '_blank',
+  } = props
   return (
     <Link
       color="primary"
       underline={'hover'}
+      target={target}
       href={href && href}
+      data-sb-kind={sbKind}
       onClick={() => {
         onCellClick && onCellClick(cellInfo)
       }}

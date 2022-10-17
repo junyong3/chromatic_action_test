@@ -12,7 +12,6 @@ const ErrorFallback = ({
 }: ErrorFallbackProps) => {
   const hasResetErrorBoundary = !!resetErrorBoundary
 
-  console.log(resetErrorBoundary)
   const handleClick = () => {
     resetErrorBoundary?.()
   }

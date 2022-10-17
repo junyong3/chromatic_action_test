@@ -6,19 +6,39 @@ type ButtonCellProps<T> = {
   cellInfo: GridRenderCellParams<T>
   onCellClick?: (row: GridRenderCellParams<T>) => void
   text: string
+  disabled?: boolean
+  color?: 'primary' | 'error'
 }
 
 function ButtonCell<T>(props: ButtonCellProps<T>) {
-  const { cellInfo, onCellClick, text } = props
+  const {
+    cellInfo,
+    onCellClick,
+    text,
+    disabled,
+    color = 'primary',
+    ...prop
+  } = props
   return (
     <Button
-      variant={'contained'}
-      color="primary"
+      {...prop}
+      variant="text"
+      color={color}
       size={'small'}
       onClick={() => {
         onCellClick && onCellClick(cellInfo)
       }}
-      sx={{ cursor: 'pointer' }}
+      disabled={disabled}
+      sx={{
+        cursor: 'pointer',
+        padding: 0,
+        minWidth: 0,
+        '> .MuiTouchRipple-root': { display: 'none' },
+        '&:hover': {
+          textDecoration: 'underline',
+          backgroundColor: 'transparent',
+        },
+      }}
     >
       {text ?? cellInfo.row[cellInfo.field]}
     </Button>

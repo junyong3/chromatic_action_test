@@ -1,8 +1,8 @@
 import { Radio as MuiRadio } from '@mui/material'
-import { RadioProps } from '@components/Radio/Props'
+import { BaseRadioProps } from '@components/Radio/Props'
 
-function Radio(props: RadioProps) {
+function BaseRadio(props: BaseRadioProps) {
   return <MuiRadio {...props} />
 }
 
-export default Radio
+export default BaseRadio

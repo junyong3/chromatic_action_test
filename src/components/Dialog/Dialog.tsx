@@ -1,48 +1,47 @@
 import {
+  Breakpoint,
   Dialog as MuiDialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
   DialogProps as MuiDialogProps,
+  DialogTitle,
 } from '@mui/material'
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { PropsWithChildren } from 'react'
 
-type DialogSize = 'es' | 'sm' | 'md' | 'lg' | 'xl'
+type DialogSize = false | Breakpoint | undefined
 
-interface DialogProps extends MuiDialogProps {
+export interface DialogProps extends MuiDialogProps {
   size: DialogSize
+  title: string
+  onClose: () => void
+  content?: string | JSX.Element
+  actions?: JSX.Element
 }
 
-function Dialog({ size, children, ...props }: PropsWithChildren<DialogProps>) {
-  const width = useMemo(() => getDialogWidth(size), [size])
-
+function Dialog({
+  size,
+  title,
+  content,
+  actions,
+  children,
+  onClose,
+  ...props
+}: PropsWithChildren<DialogProps>) {
   return (
-    <MuiDialog PaperProps={{ style: { width } }} {...props}>
+    <MuiDialog maxWidth={size} fullWidth={true} onClose={onClose} {...props}>
+      {title ? (
+        <DialogTitle data-cy={'dialogTitle'}>{title}</DialogTitle>
+      ) : null}
+      {content ? (
+        <DialogContent>
+          <DialogContentText>{content}</DialogContentText>
+        </DialogContent>
+      ) : null}
       {children}
+      {actions ? <DialogActions>{actions}</DialogActions> : null}
     </MuiDialog>
   )
-}
-
-const getDialogWidth = (size: DialogSize) => {
-  let width: number
-
-  switch (size) {
-    case 'es':
-      width = 444
-      break
-    case 'sm':
-      width = 600
-      break
-    case 'md':
-      width = 900
-      break
-    case 'lg':
-      width = 1200
-      break
-    case 'xl':
-      width = 1536
-      break
-    default:
-      width = 444
-  }
-  return width
 }
 
 export default Dialog

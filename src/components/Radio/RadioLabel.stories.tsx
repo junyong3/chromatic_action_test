@@ -1,19 +1,18 @@
 import { Story, Meta } from '@storybook/react'
 import Radio from '@components/Radio/Radio'
-import { RadioProps } from '@components/Radio/Props'
-import { RadioListWarp } from '@components/Radio/StyleObj'
-import React from 'react'
+import { BaseRadioProps } from '@components/Radio/Props'
 import FormGroup from '@components/FormGroup'
 import FormControlLabel from '@components/FormControlLabel'
+import { FlexWrap } from '../StyleObj'
 
-const Template: Story<RadioProps> = (args: RadioProps) => {
+const Template: Story<BaseRadioProps> = (args: BaseRadioProps) => {
   return (
-    <RadioListWarp>
+    <FlexWrap>
       <FormGroup>
-        <div className={'checkbox-card'}>
-          <FormControlLabel control={<Radio {...args} />} label={'체크'} />
+        <div>
+          <FormControlLabel control={<Radio {...args} />} label={'라디오'} />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Radio {...args} checked={false} color={'secondary'} />}
             label={'왼쪽'}
@@ -21,7 +20,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
             labelPlacement={'start'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Radio {...args} size={'small'} />}
             label={'위'}
@@ -29,7 +28,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
             labelPlacement={'top'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Radio {...args} checked={false} size={'medium'} />}
             label={'오른쪽'}
@@ -37,7 +36,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
             labelPlacement={'end'}
           />
         </div>
-        <div className={'checkbox-card'}>
+        <div>
           <FormControlLabel
             control={<Radio {...args} size={'medium'} />}
             label={'아래'}
@@ -46,7 +45,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
           />
         </div>
       </FormGroup>
-    </RadioListWarp>
+    </FlexWrap>
   )
 }
 export default {

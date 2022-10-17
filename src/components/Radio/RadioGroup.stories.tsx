@@ -1,14 +1,14 @@
 import { Story, Meta } from '@storybook/react'
 import Radio from '@components/Radio/Radio'
-import { RadioProps } from '@components/Radio/Props'
-import { RadioListWarp } from '@components/Radio/StyleObj'
+import { BaseRadioProps } from '@components/Radio/Props'
 import React from 'react'
 import FormControlLabel from '@components/FormControlLabel'
 import FormControl from '@components/FormControl'
 import { FormLabel } from '@mui/material'
 import RadioGroup from '@components/Radio/RadioGroup'
+import { FlexWrap } from '../StyleObj'
 
-const Template: Story<RadioProps> = (args: RadioProps) => {
+const Template: Story<BaseRadioProps> = (args: BaseRadioProps) => {
   const [value, setValue] = React.useState('female')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
   }
 
   return (
-    <RadioListWarp>
+    <FlexWrap>
       <FormControl>
         <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
         <RadioGroup
@@ -38,7 +38,7 @@ const Template: Story<RadioProps> = (args: RadioProps) => {
           />
         </RadioGroup>
       </FormControl>
-    </RadioListWarp>
+    </FlexWrap>
   )
 }
 export default {

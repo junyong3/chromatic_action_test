@@ -22,32 +22,58 @@ jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
     runs-on: ubuntu-latest
-#    timeout-minutes: 7
+    strategy:
+      matrix:
+        node-version: [ 16 ]
+    #     timeout-minutes: 7
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: cache node modules
-        uses: actions/cache@v3
-        id: cache
+      #      - uses: actions/cache@v3
+      #        id: cache-modules
+      #        with:
+      #          # node_modules라는 폴더를 검사하여
+      #          path: node_modules
+      #          # 아래 키값으로 cache가 돼있는지 확인
+      #          key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #          restore-keys: |
+      #            ${{ runner.OS }}-build-packages-
+      #            ${{ runner.OS }}-
+      #
+      #      - name: cache-hit-output
+      #        run: echo "set-output cache-hit ${{steps.cache-modules.outputs.cache-hit}}"
+      #
+      #      - name: install dependencies
+      #        if: steps.cache-modules.outputs.cache-hit != 'true'
+      #        run: pnpm install
+      - uses: pnpm/action-setup@v2.2.4
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
-#          restore-keys: |
-#            ${{ runner.OS }}-build-packages-
-#            ${{ runner.OS }}-
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-      - name: cache-hit-output
-        run: echo "set-output cache-hit ${{steps.cache.outputs.cache-hit}} hit"
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
-      - name: install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-#      - name: demo Storybook1
-#        run: npm run httpDemoStorybook
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

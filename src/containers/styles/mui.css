@@ -1,3 +1,11 @@
 .MuiDataGrid-root, .MuiAutocomplete-root, .MuiTextField-root {
   background-color: #ffffff;
 }
+
+.MuiDataGrid-columnHeaders {
+  line-height: unset !important;
+}
+
+.MuiFormControl-marginNormal{
+  margin: 12px !important;
+}

@@ -31,7 +31,7 @@ const Template: Story<DataGridProps> = (args: DataGridProps) => {
   ]
 
   /*
-   function(model: GridColumnVisibilityModel, details: GridCallbackDetails) => void
+   function(models: GridColumnVisibilityModel, details: GridCallbackDetails) => void
    * */
   return (
     <DataGridWrap>
@@ -45,6 +45,9 @@ const Template: Story<DataGridProps> = (args: DataGridProps) => {
   )
 }
 export default {
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
   title: 'components/MUI/DataGrid/Event/ColumnVisibilityModelChange',
   component: DataGrid,
 

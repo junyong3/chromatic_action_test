@@ -12,5 +12,13 @@ declare module '@mui/material/Button' {
     gray: true
   }
 }
+declare module '@mui/material/styles' {
+  interface ThemeOptions {
+    status?: {
+      fail?: string
+      cancel?: string
+    } // optional
+  }
+}
 
 export {}

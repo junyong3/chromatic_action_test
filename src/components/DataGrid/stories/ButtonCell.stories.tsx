@@ -46,6 +46,9 @@ const Template: Story<DataGridProps> = (args: DataGridProps) => {
   return <DataGrid {...args} rows={dataSet} columns={columns} />
 }
 export default {
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
   title: 'components/MUI/DataGrid/CustomCell',
   component: DataGrid,
   argTypes: {
