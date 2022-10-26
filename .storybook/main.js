@@ -94,7 +94,7 @@ module.exports = {
     },
   },
   features: {
-    // storyStoreV7: true,
+    storyStoreV7: true,
     interactionsDebugger: true, // 👈 Enable playback controls
     buildStoriesJson: true,
     // emotionAlias: false,
