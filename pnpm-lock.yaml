@@ -29,6 +29,7 @@ specifiers:
   '@storybook/channel-postmessage': ^6.5.13
   '@storybook/channel-websocket': ^6.5.13
   '@storybook/client-api': ^6.5.13
+  '@storybook/client-logger': ^6.5.13
   '@storybook/jest': ^0.0.10
   '@storybook/preset-create-react-app': ^4.1.2
   '@storybook/preview-web': ^6.5.13
@@ -118,6 +119,7 @@ devDependencies:
   '@storybook/channel-postmessage': 6.5.13
   '@storybook/channel-websocket': 6.5.13
   '@storybook/client-api': 6.5.13_biqbaboplfbrettd7655fr4n2y
+  '@storybook/client-logger': 6.5.13
   '@storybook/jest': 0.0.10_biqbaboplfbrettd7655fr4n2y
   '@storybook/preset-create-react-app': 4.1.2_reazyerxfjo4ztovvy27gxoxdq
   '@storybook/preview-web': 6.5.13_biqbaboplfbrettd7655fr4n2y
@@ -4947,7 +4949,7 @@ packages:
   /@storybook/testing-library/0.0.13_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-vRMeIGer4EjJkTgI8sQyK9W431ekPWYCWL//OmSDJ64IT3h7FnW7Xg6p+eqM3oII98/O5pcya5049GxnjaPtxw==}
     dependencies:
-      '@storybook/client-logger': 6.5.12
+      '@storybook/client-logger': 6.5.13
       '@storybook/instrumenter': 6.5.12_biqbaboplfbrettd7655fr4n2y
       '@testing-library/dom': 8.18.1
       '@testing-library/user-event': 13.5.0_znccgeejomvff3jrsk3ljovfpu
