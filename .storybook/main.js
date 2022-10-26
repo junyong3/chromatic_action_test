@@ -81,7 +81,7 @@ module.exports = {
   typescript: {
     check: false,
     checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: 'none',
     reactDocgenTypescriptOptions: {
       allowSyntheticDefaultImports: false, // speeds up storybook build time
       esModuleInterop: false, // speeds up storybook build time
