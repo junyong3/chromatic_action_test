@@ -79,7 +79,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
           token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
-          #token: ${{ github.event.pull_request.head.sha }}
+#          token: ${{ github.event.pull_request.head.sha }}
 #         workingDir: jyg-village-hall
 #          exitOnceUploaded: true
 #          onlyChanged: true
