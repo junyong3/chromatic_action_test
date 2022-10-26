@@ -28,7 +28,6 @@ specifiers:
   '@storybook/builder-vite': ^0.2.4
   '@storybook/channel-postmessage': ^6.5.13
   '@storybook/channel-websocket': ^6.5.13
-  '@storybook/client-api': ^6.5.13
   '@storybook/client-logger': ^6.5.13
   '@storybook/jest': ^0.0.10
   '@storybook/preset-create-react-app': ^4.1.2
@@ -118,7 +117,6 @@ devDependencies:
   '@storybook/builder-vite': 0.2.4_hp4h3v7jrpbadbagahrfqb5a6a
   '@storybook/channel-postmessage': 6.5.13
   '@storybook/channel-websocket': 6.5.13
-  '@storybook/client-api': 6.5.13_biqbaboplfbrettd7655fr4n2y
   '@storybook/client-logger': 6.5.13
   '@storybook/jest': 0.0.10_biqbaboplfbrettd7655fr4n2y
   '@storybook/preset-create-react-app': 4.1.2_reazyerxfjo4ztovvy27gxoxdq
