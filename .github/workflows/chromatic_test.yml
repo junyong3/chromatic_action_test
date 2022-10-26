@@ -74,20 +74,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
-          token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
-#          token: ${{ github.event.pull_request.head.sha }}
-#         workingDir: jyg-village-hall
-#          exitOnceUploaded: true
-#          onlyChanged: true
-#          traceChanged: true
-#          buildScriptName: build-storybook
-#          exitZeroOnChanges: true
-#          diagnostics: true
-###     if: contains(github.event.pull_request.labels.*.name, 'storybook')
+      - name: chromatic:pnpm call
+        run: pnpm chromatic:pnpm
+
+#      - name: Publish to Chromatic
+#        uses: chromaui/action@v1
+#        with:
+#          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
+#          token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
+##          token: ${{ github.event.pull_request.head.sha }}
+##         workingDir: jyg-village-hall
+##          exitOnceUploaded: true
+##          onlyChanged: true
+##          traceChanged: true
+##          buildScriptName: build-storybook
+##          exitZeroOnChanges: true
+##          diagnostics: true
+####     if: contains(github.event.pull_request.labels.*.name, 'storybook')
 
     outputs:
       storybookUrl: 'https://62a8139452cf51cb687f08eb-shczcsfmsp.chromatic.com/?path=/story/yookgak-introduction--page'
