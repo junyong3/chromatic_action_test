@@ -1,0 +1,76 @@
+name: chromatic_npm
+
+on:
+  push:
+    branches:
+      - main
+#on:
+#  workflow_dispatch:
+#    inputs:
+#      sha:
+#        description: 'The SHA-1 hash referring to the commit to check.'
+#        required: true
+#      ref:
+#        description: 'The head branch associated with the pull request.'
+#        default: 'develop'
+#        required: true
+# on:
+#   pull_request_target:
+#     types: [labeled]
+
+jobs:
+  chromatic-deployment:
+    name: Deploy Storybook to chromatic
+    runs-on: ubuntu-latest
+    #    timeout-minutes: 7
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: cache node modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-packages-${{ hashFiles('**/package-lock.json') }}
+      #          restore-keys: |
+      #            ${{ runner.OS }}-build-packages-
+      #            ${{ runner.OS }}-
+
+      - name: cache-hit-output
+        run: echo "set-output cache-hit ${{steps.cache.outputs.cache-hit}} hit"
+
+      - name: install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      #      - name: demo Storybook1
+      #        run: npm run httpDemoStorybook
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
+          token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
+          #token: ${{ github.event.pull_request.head.sha }}
+    #         workingDir: jyg-village-hall
+    #          exitOnceUploaded: true
+    #          onlyChanged: true
+    #          traceChanged: true
+    #          buildScriptName: build-storybook
+    #          exitZeroOnChanges: true
+    #          diagnostics: true
+    ###     if: contains(github.event.pull_request.labels.*.name, 'storybook')
+
+    outputs:
+      storybookUrl: 'https://62a8139452cf51cb687f08eb-shczcsfmsp.chromatic.com/?path=/story/yookgak-introduction--page'
+
+
+
+
+
+
+
+
+
