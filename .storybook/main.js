@@ -21,11 +21,14 @@ const svgrPlugin = require('vite-plugin-svgr')
 const { loadEnv } = require('vite')
 
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    '../src/**/*.stories.mdx',
+    '../src/domain/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
-        "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
     // '@storybook/addon-controls',
     // '@storybook/addon-links',
     // '@storybook/addon-essentials',
@@ -99,8 +102,8 @@ module.exports = {
   // },
   // framework: '@storybook/react',
   framework: {
-    "name": "@storybook/react-vite",
-    "options": {}
+    name: '@storybook/react-vite',
+    options: {},
   },
   // core: {
   //   builder: '@storybook/builder-vite',
