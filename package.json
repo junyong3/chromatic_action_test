@@ -2,7 +2,6 @@
   "name": "jyg-village-hall",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite --mode development",
     "prod": "vite --mode production",
@@ -15,11 +14,11 @@
     "cy:record": "cypress run --record",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "storybook build",
     "test-storybook": "test-storybook --stories-json",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"pnpm run build-storybook --quiet && pnpm dlx http-server storybook-static --port 6006 --silent\" \"pnpm dlx wait-on tcp:6006 && pnpm run test-storybook\"",
     "chromatic": "npx chromatic --exit-zero-on-change develop --auto-accept-changes main  --project-token",
-    "chromatic:pnpm": "pnpm dlx chromatic --exit-once-uploaded main --exit-zero-on-change main --auto-accept-changes develop  --project-token d2a79ac5d852"
+    "chromatic:pnpm": "pnpm dlx chromatic --exit-once-uploaded main --exit-zero-on-change main --auto-accept-changes main  --project-token d2a79ac5d852"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
