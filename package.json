@@ -1,5 +1,5 @@
 {
-  "name": "yookgak-2",
+  "name": "jyg-village-hall",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,8 +18,8 @@
     "build-storybook": "build-storybook",
     "test-storybook": "test-storybook --stories-json",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"pnpm run build-storybook --quiet && pnpm dlx http-server storybook-static --port 6006 --silent\" \"pnpm dlx wait-on tcp:6006 && pnpm run test-storybook\"",
-    "chromatic": "npx chromatic --exit-zero-on-change develop --auto-accept-changes develop  --project-token",
-    "chromatic:pnpm": "pnpm dlx chromati --exit-once-uploaded develop --exit-zero-on-change develop --auto-accept-changes develop  --project-token"
+    "chromatic": "npx chromatic --exit-zero-on-change develop --auto-accept-changes main  --project-token",
+    "chromatic:pnpm": "pnpm dlx chromatic --exit-once-uploaded main --exit-zero-on-change main --auto-accept-changes develop  --project-token d2a79ac5d852"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
