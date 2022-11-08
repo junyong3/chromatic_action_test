@@ -7,7 +7,7 @@ type LinkCellProps<T> = {
   onCellClick?: (row: GridRenderCellParams<T>) => void
   title?: string
   href?: string
-  sbKind?: string
+  sbkind?: string
   target?: HTMLAttributeAnchorTarget
 }
 
@@ -17,7 +17,7 @@ function LinkCell<T>(props: LinkCellProps<T>) {
     onCellClick,
     title,
     href,
-    sbKind = 'pages/Home',
+    sbkind = 'pages/Home',
     target = '_blank',
   } = props
   return (
@@ -26,7 +26,7 @@ function LinkCell<T>(props: LinkCellProps<T>) {
       underline={'hover'}
       target={target}
       href={href && href}
-      data-sb-kind={sbKind}
+      data-sb-kind={sbkind}
       onClick={() => {
         onCellClick && onCellClick(cellInfo)
       }}

@@ -1,4 +1,4 @@
-import Viewport from './app/viewPort/Viewport'
+import Viewport from './routes/viewPort/Viewport'
 import ThemeContainer from './containers/theme/ThemeContainer'
 
 function App() {

@@ -39,6 +39,7 @@ describe('Testing the Permissions', () => {
         cy.visit(href)
 
         // 공지 생성
+        cy.dataCy('subTitle').should('have.text', '공지 생성')
         cy.dataCy('title').type(title)
         cy.get('.ql-editor > p').type(desc, { delay: 100 })
 

@@ -3,13 +3,13 @@ import { ErrorByTypeViewProps } from '@components/Error/Props'
 import { Box } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import JIcon from '@components/JIcon'
-import { ERROR_TYPE_CONTENT_VIEW } from '@constants/MessageCode/msg'
+import { ALERT_SERVER_ERROR_TYPE } from '@constants/MessageCode/msg'
 import Button from '@components/Button'
 import { SLACK_계정관리_정보보안_CHANNEL_URL } from '@config'
 
 const ErrorByTypeView = (props: ErrorByTypeViewProps) => {
   const { type, clickHandler } = props
-  const msg = ERROR_TYPE_CONTENT_VIEW[type]
+  const msg = ALERT_SERVER_ERROR_TYPE[type]
   return (
     <Box px={18}>
       <Typography variant={'h5'} pb={2} pt={4}>

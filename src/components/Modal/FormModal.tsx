@@ -15,16 +15,19 @@ import { FormProvider } from 'react-hook-form'
 type DialogSize = false | Breakpoint | undefined
 
 export interface ModalProps extends MuiModalProps {
+  formId?: string
   methods: any
   size: DialogSize
   title: string
-  onClose: () => void
+  onClose?: () => void
   content?: string | JSX.Element
   actions?: JSX.Element
   onSubmit?: () => void
+  handleExited?: () => void
 }
 
 function FormModal({
+  formId = 'formModalId',
   size,
   title,
   content,
@@ -33,10 +36,17 @@ function FormModal({
   methods,
   onSubmit,
   actions,
+  handleExited,
   ...props
 }: PropsWithChildren<ModalProps>) {
   return (
-    <MuiDialog maxWidth={size} fullWidth={true} onClose={onClose} {...props}>
+    <MuiDialog
+      TransitionProps={{ onExited: handleExited }}
+      maxWidth={size}
+      fullWidth={true}
+      onClose={onClose}
+      {...props}
+    >
       {title ? (
         <DialogTitle data-cy={'modalTitle'} className={'modal'}>
           {title}
@@ -58,7 +68,7 @@ function FormModal({
       ) : null}
 
       <FormProvider {...methods}>
-        <form onSubmit={onSubmit}>
+        <form id={formId} onSubmit={onSubmit}>
           <DialogContent className={'modal'}>{content}</DialogContent>
 
           <Divider className={'modal'} variant={'middle'} />

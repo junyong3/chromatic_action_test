@@ -1,0 +1,51 @@
+import { COMMERCE_COUPON_API_PATH as COUPON_API } from '@api/path/Commerce/couponPath'
+import { COMMERCE_REVIEW_API_PATH as REVIEW_API } from '@api/path/Commerce/reviewPath'
+import { COMMERCE_MEMBER_API_PATH as MEMBER_API } from '@api/path/Commerce/memberPath'
+import { COMMERCE_PAYMENT_API_PATH as PAYMENT_API } from '@api/path/Commerce/paymentPath'
+import { COMMERCE_NOTICE_API_PATH as NOTICE_API } from '@api/path/Commerce/noticePath'
+import { COMMERCE_POINT_API_PATH as POINT_API } from '@api/path/Commerce/pointPath'
+
+export const CommerceMockPath = {
+  CouponList: `${COUPON_API.COUPON_LIST}`,
+  VerifyCouponCode: `${COUPON_API.VALIDATE_COUPON_CODE}`,
+  CreateCoupon: `${COUPON_API.CREATE_COUPON}`,
+  CouponSetActive: `${COUPON_API.SET_ACTIVE(':id')}`,
+  CouponDetail: `${COUPON_API.COUPON_DETAIL(':id')}`,
+  UpdateCoupon: `${COUPON_API.COUPON_DETAIL(':id')}`,
+  ProductList: `${COUPON_API.PRODUCT_LIST}`,
+  CategoryList: `${COUPON_API.CATEGORY_LIST}`,
+  CustomerList: `${COUPON_API.CUSTOMER_LIST}`,
+  ReviewList: `${REVIEW_API.REVIEW_LIST}`,
+  ReportList: `${REVIEW_API.REVIEW_REPORT_LIST(':id')}`,
+  ReviewDetail: `${REVIEW_API.REVIEW_DETAIL(':id')}`,
+  MemberList: `${MEMBER_API.MEMBER_LIST}`,
+  MemberDetail: `${MEMBER_API.MEMBER_DETAIL(':id')}`,
+  UpdateMember: `${MEMBER_API.UPDATE_MEMBER(':id')}`,
+  VerifyPhone: `${MEMBER_API.VALIDATE_PHONE}`,
+  VerifyEmail: `${MEMBER_API.VALIDATE_EMAIL}`,
+  CSCouponList: `${MEMBER_API.CS_COUPON_LIST}`,
+  MemberCouponList: `${MEMBER_API.MEMBER_COUPON(':id')}`,
+  GiveMemberCoupon: `${MEMBER_API.MEMBER_COUPON(':id')}`,
+  DeleteMemberCoupon: `${MEMBER_API.MEMBER_COUPON(':id')}`,
+  MemberPointHistoryList: `${MEMBER_API.MEMBER_POINT_HISTORY(':id')}`,
+  UseMemberPoint: `${MEMBER_API.MEMBER_POINT(':id')}`,
+  GiveMemberPoint: `${MEMBER_API.MEMBER_POINT(':id')}`,
+  ToggleMemberCouponExposed: `${MEMBER_API.MEMBER_COUPON(':id')}`,
+  ToggleMemberPointHistoryExposed: `${MEMBER_API.MEMBER_POINT_HISTORY(':id')}`,
+  MemberRefundAccountInfo: `${PAYMENT_API.REFUND_ACCOUNT}`,
+  SaveMemberRefundAccount: `${PAYMENT_API.SAVE_REFUND_ACCOUNT}`,
+  RemoveMemberRefundAccount: `${PAYMENT_API.REMOVE_REFUND_ACCOUNT}`,
+  RefundAccountBankList: `${PAYMENT_API.REFUND_ACCOUNT_BANK_LIST}`,
+  AddMemberCreditCard: `${PAYMENT_API.MEMBER_CREDIT_CARD}`,
+  DeleteMemberCreditCard: `${PAYMENT_API.MEMBER_CREDIT_CARD}/:memberId`,
+  MemberCreditCardList: `${PAYMENT_API.MEMBER_CREDIT_CARD}`,
+  PaymentList: `${PAYMENT_API.PAYMENT_LIST}`,
+  PaymentHistory: `${PAYMENT_API.PAYMENT_HISTORY_LIST}`,
+  UpdatePayment: `${PAYMENT_API.PAYMENT_DETAIL(':id')}`,
+  NoticeCreate: `${NOTICE_API.CREATE_NOTICE}`,
+  NoticeList: `${NOTICE_API.NOTICE_LIST}`,
+  CreatePointPaymentTarget: `${POINT_API.CREATE_POINT_TARGET}`,
+  PointList: `${POINT_API.POINT_LIST}`,
+  PointFailedList: `${POINT_API.POINT_FAILED_LIST}`,
+  DeletePointPayment: `${POINT_API.DELETE_POINT}`,
+}

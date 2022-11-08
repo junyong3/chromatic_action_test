@@ -14,6 +14,7 @@ import { FieldValues } from 'react-hook-form/dist/types/fields'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import BaseTextField from '../TextField/BaseTextField'
+import 'dayjs/locale/ko'
 
 export declare type ParseableDate<TDate> =
   | string
@@ -67,7 +68,7 @@ export default function DateTimePickerElement<
         field: { onChange, value },
         fieldState: { error, invalid },
       }) => (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'ko'}>
           <DateTimePicker
             {...rest}
             value={value || ''}
@@ -103,6 +104,7 @@ export default function DateTimePickerElement<
                 {...inputProps}
                 required={!!required}
                 error={invalid}
+                type={'datetime-local'}
                 helperText={
                   error
                     ? typeof parseError === 'function'

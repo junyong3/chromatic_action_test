@@ -15,7 +15,11 @@ function CancelForm({
 }: PropsWithChildren<CancelFormProp>) {
   return (
     <CancelBox isTab={isTab}>
-      <div className="conditionWrap">{children}</div>
+      <div className="conditionWrap">
+        <Stack direction={'column'} spacing={2}>
+          {children}
+        </Stack>
+      </div>
       <Divider variant={'middle'} />
       <div className="buttonWrap">
         <Stack direction="row" spacing={2}>

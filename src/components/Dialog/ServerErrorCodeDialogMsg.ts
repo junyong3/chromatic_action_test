@@ -1,5 +1,5 @@
-import { ERROR_TYPE_CONTENT_VIEW } from '@constants/MessageCode/msg'
-import ErrorCode from '@src/api/NetworkService/errorCode'
+import { ALERT_SERVER_ERROR_TYPE } from '@constants/MessageCode/msg'
+import ErrorCode from '@api/Instance/errorCode'
 
 export function serverErrorCodeDialogMsg(code: string | null) {
   const dialogMsg: {
@@ -18,8 +18,8 @@ export function serverErrorCodeDialogMsg(code: string | null) {
     case ErrorCode.ACCOUNT_HOLDER_INFO:
     case ErrorCode.ACCOUNT_NUMBER:
     case ErrorCode.ACCOUNT_CANCEL:
-      dialogMsg.title = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].title
-      dialogMsg.content = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].content
+      dialogMsg.title = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].title
+      dialogMsg.content = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].content
       dialogMsg.code = code
       break
     // end
@@ -27,16 +27,16 @@ export function serverErrorCodeDialogMsg(code: string | null) {
     case ErrorCode.INVALID_CUSTOMER_NAME:
     case ErrorCode.INVALID_ACCOUNT_NUMBER:
     case ErrorCode.INVALID_PROPERTY_ACCOUNT_NUMBER:
-      dialogMsg.title = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].title
-      dialogMsg.content = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].content
+      dialogMsg.title = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].title
+      dialogMsg.content = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].content
       dialogMsg.code = code
       break
     // card user tab
     case ErrorCode.INVALID_EXPIRATION_YEAR:
     case ErrorCode.INVALID_CARD_EXPIRATION:
     case ErrorCode.INVALID_CARD_NUMBER:
-      dialogMsg.title = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].title
-      dialogMsg.content = ERROR_TYPE_CONTENT_VIEW.PAYMENT.ERROR[code].content
+      dialogMsg.title = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].title
+      dialogMsg.content = ALERT_SERVER_ERROR_TYPE.PAYMENT.ERROR[code].content
       dialogMsg.code = code
       break
     default:

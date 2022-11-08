@@ -1,4 +1,4 @@
-import React from 'react'
+import { createElement } from 'react'
 import * as svg from './svg'
 
 export type JIconType = keyof typeof svg
@@ -11,7 +11,7 @@ export type JIconProps = {
 }
 
 function JIcon({ name, className, style, onClick, fill }: JIconProps) {
-  return React.createElement(svg[name], {
+  return createElement(svg[name], {
     className,
     onClick,
     style,

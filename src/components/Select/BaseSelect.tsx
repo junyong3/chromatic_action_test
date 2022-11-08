@@ -40,16 +40,10 @@ function BaseSelect<T>({
         label={label}
         value={value}
         error={error}
-        input={<OutlinedInput label={label} />}
+        input={<OutlinedInput label={label} sx={{ fontStyle: 'italic' }} />}
         size={size}
         inputProps={{
           required: false,
-        }}
-        renderValue={(selected: any) => {
-          if (placeholder && selected === '') {
-            return <em>{placeholder}</em>
-          }
-          return <em>{selected}</em>
         }}
         onChange={props.onChange}
       >

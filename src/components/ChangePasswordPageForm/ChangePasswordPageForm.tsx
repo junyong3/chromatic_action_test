@@ -5,7 +5,7 @@ import BaseTextField from '@components/TextField'
 import LoadingService from '@services/LoadingService'
 import { Alert } from '@mui/material'
 import { ChangePasswordReq } from '@api/model/IAM/changePassword'
-import ErrorCode from '@api/NetworkService/errorCode'
+import ErrorCode from '@api/Instance/errorCode'
 import { useNavigate } from 'react-router-dom'
 import { To } from '@routes/To'
 import { useAuthStore } from '@stores/auth.store'
@@ -15,9 +15,9 @@ import { AxiosError } from 'axios'
 import { MSG } from '@constants/MessageCode/msg'
 import { INVALID_PARAMETERS_CODE } from '@api/model/IAM/changePassword'
 import { useMutationWrap } from '@queries/useMutation'
-import NetworkService from '@api/NetworkService'
 import { IAM_API_PATH } from '@api/path/IAM/iamPath'
 import { REGEXP } from '@src/constants/REGEXP'
+import Instance from '@api/Instance'
 
 function ChangePasswordPageForm() {
   const { mutate } = useMutationWrap()
@@ -81,7 +81,7 @@ function ChangePasswordPageForm() {
     }
 
     mutate(
-      NetworkService.iam.post<ChangePasswordReq>(
+      Instance.post<ChangePasswordReq>(
         IAM_API_PATH.CHANGE_PASSWORD,
         changePasswordParams
       ),
@@ -90,12 +90,10 @@ function ChangePasswordPageForm() {
           if (success) {
             if (temporallyStoredEmailForChangingPassword) {
               setTemporallyStoredEmailForChangingPassword(null)
-              SnackbarService.show(
-                '비밀번호가 변경되었습니다. 변경된 비밀번호로 재로그인해 주세요.'
-              )
+              SnackbarService.show(MSG.SUCCESS.IAM.CHANGE_PASSWORD_GOTO_LOGIN)
               navigate(To.Login)
             } else {
-              SnackbarService.show('비밀번호가 변경되었습니다.')
+              SnackbarService.show(MSG.SUCCESS.IAM.CHANGE_PASSWORD)
               navigate(To.Home)
             }
           }

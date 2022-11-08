@@ -18,6 +18,11 @@ function MDMLayout() {
         {
           label: '원부자재/제상품',
           subMenuList: [
+            {
+              label: '자재 카테고리 관리',
+              to: To.MDMGoodsMaterialCategory,
+              target: '_blank',
+            },
             { label: '원부자재 관리', to: To.MDMGoodsMaterial },
             { label: '제상품 관리', to: To.MDMGoodsProduct },
             {
@@ -30,15 +35,15 @@ function MDMLayout() {
             },
             {
               label: '제상품 판매 가격 관리',
-              to: To.MDMGoodsMaterialSellingPrice,
+              to: To.MDMGoodsProductSellingPrice,
             },
           ],
         },
         {
           label: '협력사',
           subMenuList: [
-            { label: '매입처 관리', to: To.MDMHome },
-            { label: '매출처 관리', to: To.MDMHome },
+            { label: '매입처 관리', to: To.MDMPartnersVender },
+            { label: '매출처 관리', to: To.MDMPartnersClient },
           ],
         },
         {
@@ -59,7 +64,9 @@ function MDMLayout() {
         },
         {
           label: '부가정보',
-          subMenuList: [{ label: '보건증 관리', to: To.MDMHome }],
+          subMenuList: [
+            { label: '보건증 관리', to: To.MDMAddInfoHealthCertificate },
+          ],
         },
       ]}
     />

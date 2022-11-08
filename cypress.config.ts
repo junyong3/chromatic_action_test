@@ -12,5 +12,6 @@ export default defineConfig({
       })
     },
   },
+  pageLoadTimeout: 120000,
   env: {},
 })

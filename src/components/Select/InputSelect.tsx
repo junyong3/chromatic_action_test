@@ -1,28 +1,31 @@
+import { createElement } from 'react'
+import { MenuItem } from '@mui/material'
 import { Controller } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types/fields'
+import BaseTextField from '../TextField'
 import { InputSelectProps } from '@components/Select/Props'
-import BaseSelect from '@components/Select/BaseSelect'
 
-export default function InputSelect<TFieldValues extends FieldValues>(
-  props: InputSelectProps<TFieldValues>
-): JSX.Element {
-  const {
-    options,
-    label = '',
-    optionKey = {
-      value: 'value',
-      label: 'label',
-    },
-    displayEmpty = false,
-    required = false,
-    validation = {},
-    parseError,
-    name,
-    minWidth = 120,
-    control,
-    ...rest
-  } = props
-  let helperText = rest.helperText
+export default function InputSelect<TFieldValues extends FieldValues>({
+  name,
+  required,
+  optionKey = {
+    value: 'value',
+    label: 'label',
+  },
+  options = [],
+  parseError,
+  type,
+  objectOnChange,
+  validation = {},
+  control,
+  placeholder,
+  minWidth = 120,
+  onChangeHandler,
+  ...rest
+}: InputSelectProps<TFieldValues>): JSX.Element {
+  const isNativeSelect = !!rest.SelectProps?.native
+  const ChildComponent = isNativeSelect ? 'option' : MenuItem
+
   if (required && !validation.required) {
     validation.required = true
   }
@@ -33,32 +36,69 @@ export default function InputSelect<TFieldValues extends FieldValues>(
       rules={validation}
       control={control}
       render={({
-        field: { value, onChange, onBlur },
+        field: { onBlur, onChange, value },
         fieldState: { invalid, error },
       }) => {
-        helperText = error
-          ? typeof parseError === 'function'
-            ? parseError(error)
-            : error.message
-          : helperText
+        // handle shrink on number input fields
+        if (type === 'number' && typeof value !== 'undefined') {
+          rest.InputLabelProps = rest.InputLabelProps || {}
+          rest.InputLabelProps.shrink = true
+        }
+        if (typeof value === 'object') {
+          value = value[optionKey.value] // if value is object get key
+        }
         return (
-          <BaseSelect
+          <BaseTextField
             {...rest}
-            displayEmpty={displayEmpty}
-            id={rest.id}
-            width={minWidth}
-            helperText={helperText}
-            optionList={options}
-            optionKey={optionKey}
-            label={label || undefined}
-            error={invalid}
-            value={value}
-            required={required}
-            onChange={onChange}
+            name={name}
+            value={value ?? ''}
             onBlur={onBlur}
-          />
+            onChange={(event) => {
+              let item: string | number = event.target.value
+              if (type === 'number') {
+                item = Number(item)
+              }
+              onChange(item)
+              onChangeHandler && onChangeHandler(item)
+              if (typeof rest.onChange === 'function') {
+                if (objectOnChange) {
+                  item = options.find((i) => i[optionKey.value] ?? i === item)
+                }
+                rest.onChange(item)
+              }
+            }}
+            select
+            required={required}
+            error={invalid}
+            helperText={
+              error
+                ? typeof parseError === 'function'
+                  ? parseError(error)
+                  : error.message
+                : rest.helperText
+            }
+            size={'small'}
+            sx={{ width: minWidth }}
+          >
+            {isNativeSelect && <option />}
+            {placeholder ? (
+              <MenuItem disabled value="">
+                <em>{placeholder}</em>
+              </MenuItem>
+            ) : null}
+            {options.map((item: any) =>
+              createElement(
+                ChildComponent,
+                {
+                  key: `${name}_${item[optionKey.value] ?? item}`,
+                  value: item[optionKey.value] ?? item,
+                },
+                item[optionKey.label] ?? item
+              )
+            )}
+          </BaseTextField>
         )
       }}
-    />
+    ></Controller>
   )
 }

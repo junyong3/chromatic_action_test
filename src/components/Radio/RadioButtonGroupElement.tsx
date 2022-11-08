@@ -129,7 +129,7 @@ export default function RadioButtonGroupElement<
               value={optionKey}
               label={option[labelKey]}
               key={optionKey}
-              disabled={disabled}
+              disabled={option['disabled'] ?? disabled}
             />
           )
         })}

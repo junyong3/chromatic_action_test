@@ -15,9 +15,9 @@ export default function InputDatePicker<TFieldValues extends FieldValues>(
     validation = {},
     inputProps,
     control,
-    ...muiprops
+    ...muiProps
   } = props
-  const { onChange: muiOnChange, helperText, ...mui } = muiprops
+  const { onChange: muiOnChange, helperText, ...mui } = muiProps
   if (required && !validation.required) {
     validation.required = 'This field is required'
   }

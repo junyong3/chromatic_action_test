@@ -1,11 +1,12 @@
 import { IAMLayout, CommerceLayout, MDMLayout } from '@layouts/SidebarLayout'
 import EmptyLayout from '@layouts/EmptyLayout'
 import { RouteListType } from '@src/routes/routeType'
-import { ROOT } from '@src/routes/rootRoute'
-import { IAMRoot, IAMChildren } from '@src/routes/IAM'
-import { CommerceRoot, CommerceChildren } from '@src/routes/Commerce'
-import { MDMRoot, MDMChildren } from '@src/routes/MDM'
-import DocTitle from '@src/components/Page/DocTitle'
+import { ROOT } from '@domain/common/router/rootRoute'
+import { IAMRoot, IAMChildren } from '@domain/IAM/router'
+import { CommerceRoot, CommerceChildren } from '@domain/Commerce/router'
+import { MDMRoot, MDMChildren } from '@domain/MDM/router'
+import DocTitle from '@components/Page/DocTitle'
+import React from 'react'
 
 export const RouteList: RouteListType = {
   ROOT,

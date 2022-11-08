@@ -8,10 +8,10 @@ import SearchFormItem from '@components/SearchFormItem'
 import InputTextField from '@components/TextField/InputTextField'
 import InputRadio from '@components/Radio/InputRadio'
 import InputCheckbox from '@components/Checkbox/InputCheckbox'
-import useMemberStore from '@src/stores/Commerce/Member/member.store'
+import useMemberStore from '@stores/Commerce/Member/member.store'
 import SnackbarService from '@services/SnackbarService'
 import { useMutationWrap } from '@queries/useMutation'
-import NetworkService from '@api/NetworkService'
+import Instance from '@api/Instance'
 import { AdminCreateCardDto } from '@api/model/Commerce/payment'
 import { COMMERCE_PAYMENT_API_PATH } from '@api/path/Commerce/paymentPath'
 import LoadingService from '@services/LoadingService'
@@ -21,7 +21,7 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from 'react-query'
 import { useErrorStore } from '@stores/error.store'
 import ServerErrorCodeDialog from '@components/Dialog/ServerErrorCodeDialog'
-import { MemberQueryKey } from '@src/pages/Member/Props'
+import { MemberQueryKey } from '@domain/Commerce/pages/Member/Props'
 const UserVerificationOpt = [
   {
     label: '생년월일',
@@ -102,7 +102,7 @@ function CardAddDialog() {
 
     LoadingService.show()
     mutate(
-      NetworkService.commercePayment.post<AdminCreateCardDto>(
+      Instance.post<AdminCreateCardDto>(
         COMMERCE_PAYMENT_API_PATH.MEMBER_CREDIT_CARD,
         cardInfoDataSet
       ),
@@ -315,10 +315,16 @@ function CardAddFormRow(
 ) {
   const { label, children, labelWidth, required = false } = props
   return (
-    <SearchFormRow>
-      <SearchFormItem label={label} labelWidth={labelWidth} required={required}>
-        {children}
-      </SearchFormItem>
-    </SearchFormRow>
+    <Box py={1}>
+      <SearchFormRow>
+        <SearchFormItem
+          label={label}
+          labelWidth={labelWidth}
+          required={required}
+        >
+          {children}
+        </SearchFormItem>
+      </SearchFormRow>
+    </Box>
   )
 }

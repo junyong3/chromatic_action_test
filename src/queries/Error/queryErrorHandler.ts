@@ -1,4 +1,4 @@
-import ErrorCode from '@api/NetworkService/errorCode'
+import ErrorCode from '@api/Instance/errorCode'
 import { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
 import { IAMErrorRes } from '@api/model/IAMRes'
 import { NavigateFunction, useNavigate } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { useCallback } from 'react'
 import { To } from '@routes/To'
 import { RefreshTokenReq } from '@api/model/IAM/refreshToken'
 import { getItem, LocalStorageKey } from '@utils/storage/localStorage'
-import NetworkService from '@api/NetworkService'
+import Instance from '@api/Instance'
 import * as Sentry from '@sentry/react'
 import { IAM_API_PATH } from '@api/path/IAM/iamPath'
 
@@ -26,7 +26,7 @@ export const apiErrorType = (
   navigate: NavigateFunction
 ) => {
   const httpStatus = error.response?.status
-  const prevReq = error.config
+  const prevReq = error.config as AxiosRequestConfig
   const errorCode = error.response?.data?.code
   switch (httpStatus) {
     case 400:
@@ -34,11 +34,11 @@ export const apiErrorType = (
       break
     // Unauthorized
     case 401:
-      http401Status(prevReq, errorCode, navigate)
+      void http401Status(prevReq, errorCode, navigate)
       break
     // Forbidden
     case 403:
-      http403Status(prevReq, errorCode, navigate)
+      void http403Status(prevReq, errorCode, navigate)
       SentrySetContext(error)
       break
     case 0:
@@ -98,7 +98,7 @@ const http400Status = (
   }
 }
 const http401Status = async (
-  prevReq: AxiosRequestConfig<any>,
+  prevReq: AxiosRequestConfig,
   errorCode: string | undefined,
   navigate: NavigateFunction
 ) => {
@@ -111,19 +111,19 @@ const http401Status = async (
           refreshToken: refreshToken as string,
         }
 
-        const { data } = await NetworkService.iam.post<RefreshTokenReq>(
+        const { data } = await Instance.post<RefreshTokenReq>(
           IAM_API_PATH.REFRESH_TOKENS,
           refreshTokenReqParams
         )
 
-        NetworkService.setAccessToken(data.accessToken)
-        NetworkService.setRefreshToken(data.refreshToken)
+        Instance.setAccessToken(data.accessToken)
+        Instance.setRefreshToken(data.refreshToken)
 
         if (prevReq) {
           const axiosReqHeaders = prevReq.headers as AxiosRequestHeaders
           axiosReqHeaders['Authorization'] = `Bearer ${data.accessToken}`
 
-          return NetworkService.iamAPI(prevReq)
+          return Instance.instance(prevReq)
         }
       } else {
         window.location.href = '/login'
@@ -148,7 +148,7 @@ const http401Status = async (
 }
 
 const http403Status = async (
-  prevReq: AxiosRequestConfig<any>,
+  prevReq: AxiosRequestConfig,
   errorCode: string | undefined,
   navigate: NavigateFunction
 ) => {
@@ -166,27 +166,30 @@ const http403Status = async (
 }
 
 const SentrySetContext = (error: AxiosError<IAMErrorRes<any>>) => {
-  const { method, url, params, data: configData, headers } = error.config // axios의 error객체
-  const res = error.response // axios의 error객체
-  Sentry.setContext('API_Request', {
-    method,
-    url,
-    params,
-    configData,
-    headers,
-  })
-  if (res) {
-    Sentry.setContext('API_Response', {
-      status: res?.status,
-      data: res?.data,
-    })
-  }
+  if (error.config) {
+    const { method, url, params, data: configData, headers } = error.config // axios의 error객체
 
-  Sentry.withScope((scope: Sentry.Scope) => {
-    scope.setTag('APICall', 'Error')
-    scope.setLevel('error')
-    Sentry.captureException('API Error : ' + error)
-  })
-  // Sentry.captureException('API Request Detail :', )
-  // Sentry.captureException('API Response Detail :' + error.response)
+    const res = error.response // axios의 error객체
+    Sentry.setContext('API_Request', {
+      method,
+      url,
+      params,
+      configData,
+      headers,
+    })
+    if (res) {
+      Sentry.setContext('API_Response', {
+        status: res?.status,
+        data: res?.data,
+      })
+    }
+
+    Sentry.withScope((scope: Sentry.Scope) => {
+      scope.setTag('APICall', 'Error')
+      scope.setLevel('error')
+      Sentry.captureException('API Error : ' + error)
+    })
+    // Sentry.captureException('API Request Detail :', )
+    // Sentry.captureException('API Response Detail :' + error.response)
+  }
 }

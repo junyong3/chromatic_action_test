@@ -5,9 +5,9 @@ import styled from '@emotion/styled'
 function EmptyLayout() {
   return (
     <MainWrap>
-      <Main>
+      <ContentWrap>
         <Outlet />
-      </Main>
+      </ContentWrap>
     </MainWrap>
   )
 }
@@ -19,7 +19,7 @@ const MainWrap = styled.div`
   background: #fafafa;
 `
 
-const Main = styled.main`
+export const ContentWrap = styled.main`
   height: auto;
   width: 1152px;
   padding: 24px 32px;

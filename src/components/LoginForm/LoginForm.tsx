@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Button from '@components/Button'
-import ErrorCode from '@api/NetworkService/errorCode'
+import ErrorCode from '@api/Instance/errorCode'
 import { useAuthStore } from '@stores/auth.store'
 import { Alert } from '@mui/material'
 import LoadingService from '@services/LoadingService'
 import { To } from '@routes/To'
 import { MSG } from '@constants/MessageCode/msg'
 import { useMutationWrap } from '@queries/useMutation'
-import NetworkService from '@api/NetworkService'
+import Instance from '@api/Instance'
 import { LoginReq, LoginRes } from '@api/model/IAM/login'
 import { FormProvider, useForm } from 'react-hook-form'
 import TextFieldElement from '@components/TextField/InputTextField'
@@ -54,8 +54,8 @@ function LoginForm() {
       if (response.success) {
         const { data } = response
 
-        NetworkService.setAccessToken(data.accessToken)
-        NetworkService.setRefreshToken(data.refreshToken)
+        Instance.setAccessToken(data.accessToken)
+        Instance.setRefreshToken(data.refreshToken)
 
         setLoggedEmail(data.username)
         Sentry.setUser({ email: data.username })
@@ -93,7 +93,7 @@ function LoginForm() {
 
     const onSettled = () => LoadingService.close()
 
-    mutate(NetworkService.iam.post<LoginReq>(IAM_API_PATH.LOGIN, params), {
+    mutate(Instance.post<LoginReq>(IAM_API_PATH.LOGIN, params), {
       onSuccess,
       onError,
       onSettled,

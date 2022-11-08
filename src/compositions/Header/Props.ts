@@ -1,5 +1,5 @@
-import Button from '@src/components/Button'
-import { ButtonProps } from '@src/components/Button/Props'
+import Button from '@components/Button'
+import { ButtonProps } from '@components/Button/Props'
 
 export type ListHeaderProps = {
   title: string
@@ -7,7 +7,7 @@ export type ListHeaderProps = {
     text: string
     link?: string
     isDisabled?: boolean
-    sbKind?: string
+    sbkind?: string
     onClick?: () => void
   }
   navigation?: {
@@ -20,13 +20,13 @@ export type ListHeaderProps = {
 export type SubHeaderProps = {
   title: string
   deleteButton?: {
-    sbKind?: string
+    sbkind?: string
   } & ButtonProps
   updateButton?: {
-    sbKind?: string
+    sbkind?: string
   } & ButtonProps
   saveButton?: {
-    sbKind?: string
+    sbkind?: string
   } & ButtonProps
   anotherButton?: ({ text: string } & ButtonProps)[]
 }

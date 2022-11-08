@@ -7,11 +7,7 @@ function DetailFormItem(props: PropsWithChildren<DetailFormItemProps>) {
   const { children, label, required = false } = props
   return (
     <DetailFormItemWrap>
-      <Typography
-        sx={{ paddingBottom: '8px' }}
-        variant={'subtitle2'}
-        required={required}
-      >
+      <Typography pb={1} variant={'subtitle2'} required={required}>
         {label}
       </Typography>
       {children}

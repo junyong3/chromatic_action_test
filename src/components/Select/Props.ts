@@ -1,6 +1,12 @@
 import { SelectProps as MuiSelectProps } from '@mui/material/Select'
-import { Control, FieldError, FieldValues, Path } from 'react-hook-form'
-import { FormControlProps } from '@mui/material'
+import {
+  Control,
+  ControllerProps,
+  FieldError,
+  FieldValues,
+  Path,
+} from 'react-hook-form'
+import { FormControlProps, TextFieldProps } from '@mui/material'
 
 export interface BaseSelectProps<T> extends MuiSelectProps<T> {
   optionList: { id: string | number; label: string }[] | any[]
@@ -14,6 +20,23 @@ export interface BaseSelectProps<T> extends MuiSelectProps<T> {
 }
 
 export type InputSelectProps<T extends FieldValues> = Omit<
+  TextFieldProps,
+  'name' | 'type' | 'onChange'
+> & {
+  validation?: ControllerProps['rules']
+  name: Path<T>
+  options?: any[]
+  optionKey?: { value: string; label: string }
+  type?: 'string' | 'number'
+  parseError?: (error: FieldError) => string
+  objectOnChange?: boolean
+  onChange?: (value: any) => void
+  control?: Control<T>
+  minWidth?: number
+  onChangeHandler?: (value: any) => void
+}
+
+export type InputSelectProps_back<T extends FieldValues> = Omit<
   MuiSelectProps,
   'value'
 > & {
@@ -32,6 +55,7 @@ export type InputSelectProps<T extends FieldValues> = Omit<
   parseError?: (error: FieldError) => string
   helperText?: string
   showChips?: boolean
+  onChangeHandler?: (value: any) => void
   control?: Control<T>
   formControlProps?: Omit<FormControlProps, 'fullWidth' | 'variant'>
 }

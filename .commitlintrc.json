@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "@commitlint/config-conventional"
+  ],
+  "rules": {
+    "body-leading-blank": [
+      2,
+      "always"
+    ],
+    "subject-case": [
+      0,
+      "always",
+      [
+        "lower-case",
+        "upper-case",
+        "camel-case",
+        "kebab-case",
+        "pascal-case",
+        "sentence-case",
+        "snake-case",
+        "start-case"
+      ]
+    ],
+    "type-enum": [
+      2,
+      "always",
+      [
+        "init",
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "storybook",
+        "test",
+        "chore",
+        "squash",
+        "skip",
+        "revert"
+      ]
+    ]
+  }
+}

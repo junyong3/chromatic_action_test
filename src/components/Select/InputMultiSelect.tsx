@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Cancel'
-import { Controller } from 'react-hook-form'
+import { Controller, FieldValues } from 'react-hook-form'
 import {
   Checkbox,
   Chip,
@@ -11,7 +11,7 @@ import {
   Select,
 } from '@mui/material'
 import { InputMultiSelectProps } from '@components/Select/Props'
-import { FieldValues } from 'react-hook-form/dist/types/fields'
+// import { FieldValues } from 'react-hook-form/dist/types/fields'
 
 const ITEM_HEIGHT = 58
 const ITEM_PADDING_TOP = 8
@@ -87,6 +87,7 @@ function InputMultiSelect<T extends FieldValues>(
             <Select
               {...muiProps}
               id={muiProps.id || `select-multi-select-${name}`}
+              sx={{ ...muiProps.sx, backgroundColor: 'white' }}
               multiple
               label={label || undefined}
               error={invalid}

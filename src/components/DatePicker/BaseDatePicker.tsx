@@ -5,6 +5,7 @@ import {
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { BaseDatePickerProps } from './Props'
 import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
 
 function BaseDatePicker(args: BaseDatePickerProps) {
   const {
@@ -24,7 +25,7 @@ function BaseDatePicker(args: BaseDatePickerProps) {
   } = args
   const formatMask = dateFormat.replace(/([A-Z|a-z])/g, '_')
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'ko'}>
       <MuiDatePicker
         {...args}
         label={label}

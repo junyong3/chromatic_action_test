@@ -6,6 +6,12 @@ export const MSG = {
       '관련 코드 수정 없이 권한명이 수정되는 경우 오류가 발생할 수 있습니다. 관련 코드 수정은 백엔드 담당자에게 문의해주세요.',
     CREATE_NOTICE_CODE:
       '노출 상태는 저장 후, 수정 화면에서 변경할 수 있습니다.',
+    BATCH_ROW_UPDATE_DELETE: '선택된 row만 수정/삭제 됩니다.',
+    COMMERCE: {
+      MEMBER: {
+        ALREADY_IN_USE: '다른 회원이 사용하고 있어, 변경할 수 없습니다.',
+      },
+    },
   },
   ERROR: {
     NO_EMAIL: '이메일을 입력해 주세요',
@@ -27,11 +33,24 @@ export const MSG = {
     ALREADY_PERMISSION: '이미 추가된 권한입니다. 다른 권한을 선택해 주세요.',
   },
   SUCCESS: {
+    IAM: {
+      CHANGE_PASSWORD_GOTO_LOGIN:
+        '비밀번호가 변경되었습니다. 변경된 비밀번호로 재로그인해 주세요.',
+      CHANGE_PASSWORD: '비밀번호가 변경되었습니다.',
+    },
     SAVE_ROLE: '역할 정보가 저장되었습니다.',
     SAVE_ORG: '조직 정보가 저장되었습니다.',
     SAVE_FACTORY: '공장/센터 정보가 저장되었습니다.',
+    SAVE_WAREHOUSE: '창고 정보가 저장되었습니다.',
+    SAVE_AREA: '구역 정보가 저장되었습니다.',
+    SAVE_HEALTH_CRET: '보건증 정보가 저장되었습니다.',
+    SAVE_LOCATION: '로케이션 정보가 저장되었습니다.',
+    DELETE_LOCATION: '로케이션 정보가 삭제되었습니다.',
     DELETE_FACTORY: '공장/센터 정보가 삭제되었습니다.',
+    DELETE_AREA: '구역 정보가 삭제되었습니다.',
+    DELETE_HEALTH_CRET: '보건증 정보가 삭제되었습니다.',
     DELETE_ORG: '조직 정보가 삭제되었습니다.',
+    DELETE_WAREHOUSE: '창고 정보가 삭제되었습니다.',
     DELETE_ROLE: '역할이 삭제되었습니다.',
     SAVE_PERMISSION: '권한 정보가 저장되었습니다.',
     SAVE_NOTICE: '공지 정보가 저장되었습니다.',
@@ -52,19 +71,50 @@ export const MSG = {
     DELETE_CARD: '카드 삭제가 완료되었습니다.',
     SAVE_CARD: '카드 등록이 완료되었습니다.',
     SAVE_REFUNDS: '환급 계좌 정보가 저장되었습니다.',
+    SAVE_CATEGORY: '카테고리 정보가 저장되었습니다.',
     DELETE_REFUNDS: '환급 계좌 정보가 삭제되었습니다.',
-    DELETE_MATERIAL: '원부자재가 삭제되었습니다.',
-    DELETE_PRODUCT: '제상품이 삭제되었습니다.',
+    COMMERCE: {
+      MEMBER: {
+        USE_POINT: '적립금이 사용되었습니다.',
+      },
+      COUPON: {
+        CREATE_COUPON: '쿠폰이 생성되었습니다.',
+        UPDATE_COUPON: '쿠폰이 저장되었습니다.',
+      },
+    },
+    MDM: {
+      GOODS: {
+        CREATE_MATERIAL: '원부자재가 생성되었습니다.',
+        DELETE_MATERIAL: '원부자재가 삭제되었습니다.',
+        UPDATE_MATERIAL: '원부자재가 수정되었습니다.',
+        CREATE_PRODUCT: '제상품이 생성되었습니다.',
+        UPDATE_PRODUCT: '제상품이 수정되었습니다.',
+        DELETE_PRODUCT: '제상품이 삭제되었습니다.',
+        ADD_PURCHASE_PRICE: '구매 가격이 추가되었습니다.',
+        DELETE_PURCHASE_PRICE: '구매 가격이 삭제되었습니다.',
+        UPDATE_PURCHASE_PRICE: '구매 가격이 수정되었습니다.',
+        ADD_SELLING_PRICE: '판매 가격이 추가되었습니다.',
+        DELETE_SELLING_PRICE: '판매 가격이 삭제되었습니다.',
+        UPDATE_SELLING_PRICE: '판매 가격이 수정되었습니다.',
+      },
+      PARTNERS: {
+        ADD_VENDER: '매입처가 추가되었습니다.',
+        DELETE_VENDER: '매입처가 삭제되었습니다.',
+        UPDATE_VENDER: '매입처가 수정되었습니다.',
+        ADD_CLIENT: '매출처가 추가되었습니다.',
+        DELETE_CLIENT: '매출처가 삭제되었습니다.',
+        UPDATE_CLIENT: '매출처가 수정되었습니다.',
+      },
+    },
   },
   WARNING: {
     SAMPLE: '다시 한번 체크 해주세요.',
   },
 }
 
-export const ERROR_TYPE_CONTENT_VIEW = {
+export const ALERT_SERVER_ERROR_TYPE = {
   NETWORK_ERROR: {
     title: '네트워크 오류가 발생했습니다.',
-
     content: '인터넷이 정상적으로 연결되어 있는지 확인 후 다시 시도해 주세요.',
     buttonName: '',
   },
@@ -133,6 +183,49 @@ export const ERROR_TYPE_CONTENT_VIEW = {
           '유효하지 않은 계좌 정보입니다. \n' +
           '은행사 및 계좌 번호를 다시 한 번 확인해 주세요.',
       },
+    },
+  },
+}
+
+export const ALERT_CLIENT_ERROR_TYPE: any = {
+  BASE: {
+    title: '',
+    content: '',
+  },
+  CHECK: {
+    title: '체크',
+    content: '확인해주세요.',
+  },
+}
+export const CONFIRM_DIALOG_MSG: any = {
+  TEMP: {
+    BASE: {
+      title: '',
+      content: '',
+    },
+  },
+  DELETE: {
+    BASE: {
+      title: '삭제',
+      content: '삭제하시겠습니까?',
+    },
+  },
+  SAVE: {
+    BASE: {
+      title: '저장',
+      content: '저장하시겠습니까?',
+    },
+  },
+  UPDATE: {
+    BASE: {
+      title: '수정',
+      content: '수정하시겠습니까?',
+    },
+  },
+  CREATE: {
+    BASE: {
+      title: '추가',
+      content: '추가하시겠습니까?',
     },
   },
 }

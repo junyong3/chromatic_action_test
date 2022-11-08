@@ -39,6 +39,7 @@ describe('Testing the Roles', () => {
         cy.visit(href)
 
         // 역할 생성
+        cy.dataCy('subTitle').should('have.text', '역할 생성')
         cy.dataCy('roleName').type(roleName)
         cy.dataCy('memo').type(memo)
 
@@ -76,7 +77,10 @@ describe('Testing the Roles', () => {
             .clear()
             .type(updatedMemo)
 
-          cy.get('.MuiDataGrid-cell .MuiButton-root').first().click()
+          cy.get('.MuiDataGrid-cell .MuiButton-root')
+            .first()
+            .dataCy('deleteButton')
+            .click()
         })
 
         // 역할 저장

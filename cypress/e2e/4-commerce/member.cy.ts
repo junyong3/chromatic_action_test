@@ -1,11 +1,7 @@
 import { MSG } from '@constants/MessageCode/msg'
 import { COMMERCE_PAYMENT_API_PATH } from '@api/path/Commerce/paymentPath'
-import { API_ROOT_PATH } from '@src/api/path/ROOTPath'
-import { COMMERCE_MEMBER_API_PATH } from '@src/api/path/Commerce/memberPath'
-import { ContentPasteSearchOutlined } from '@mui/icons-material'
+import { COMMERCE_MEMBER_API_PATH } from '@api/path/Commerce/memberPath'
 
-const RootMemberPath = API_ROOT_PATH.COMMERCE_MEMBER
-const RootPaymentPath = API_ROOT_PATH.COMMERCE_PAYMENT
 const email = Cypress.env('CY_TEST_ID')
 const pwd = Cypress.env('CY_TEST_PWD')
 const secret = Cypress.env('CY_OTP_SECRET')
@@ -44,7 +40,7 @@ describe('Testing the Commerce Member Page', () => {
     // ============= 회원 목록 테스트 시작 ===============
     cy.intercept({
       method: 'get',
-      url: `${RootMemberPath}${COMMERCE_MEMBER_API_PATH.MEMBER_LIST}?*`,
+      url: `${COMMERCE_MEMBER_API_PATH.MEMBER_LIST}?*`,
     }).as('memberList')
 
     // 회원 UID 검색
@@ -79,12 +75,12 @@ describe('Testing the Commerce Member Page', () => {
     // ============= 회원 상세 조회 테스트 시작 ===============
     cy.intercept({
       method: 'get',
-      url: `${RootMemberPath}${COMMERCE_MEMBER_API_PATH.MEMBER_DETAIL('')}*`,
+      url: `${COMMERCE_MEMBER_API_PATH.MEMBER_DETAIL('')}*`,
     }).as('memberDetail')
     //
     cy.intercept({
       method: 'post',
-      url: `${RootMemberPath}${COMMERCE_MEMBER_API_PATH.VALIDATE_PHONE}`,
+      url: `${COMMERCE_MEMBER_API_PATH.VALIDATE_PHONE}`,
     }).as('VerifyPhone')
 
     cy.visit(`/commerce/member/${memberUID}`)
@@ -99,6 +95,7 @@ describe('Testing the Commerce Member Page', () => {
     // 회원 수정 화면 이동
     cy.dataCy('updateButton').click()
 
+    cy.dataCy('subTitle').should('have.text', '회원 수정')
     // 회원 이름 변경
     cy.dataCy('name').find('input').clear().type(updateMemberName)
 
@@ -130,25 +127,44 @@ describe('Testing the Commerce Member Page', () => {
       cy.dataCy('dialogSaveButton').click()
     })
     // ============= 회원 상세 조회 테스트 종료 ===============
+  })
 
+  it('3. 카드, 환급계좌 Tab 조회, 추가, 삭제 처리', () => {
     // ============= 카드 Tab 테스트 시작 ===============
     cy.intercept({
       method: 'get',
-      url: RootPaymentPath + COMMERCE_PAYMENT_API_PATH.MEMBER_CREDIT_CARD + '*',
+      url: COMMERCE_PAYMENT_API_PATH.MEMBER_CREDIT_CARD + '*',
     }).as('cards')
     cy.visit(`/commerce/member/${memberUID}`)
+    cy.dataCy('subTitle').should('have.text', '회원 상세')
+    // card List
+    // cy.wait('@cards').then((res) => {
+    //   console.log(res)
+    //   cy.debug()
+    // })
 
     // card List
-    cy.wait('@cards').its('response.statusCode').should('eq', 304)
+    // cy.wait('@cards').its('response.statusCode').should('eq', 304)
 
     // 카드 추가
     cy.dataCy('card').click()
     cy.dataCy('cardAddDialog').click()
 
-    cy.dataCy('cardNumber').find('input').type('5531844005599999')
-    cy.dataCy('ExpirationPeriod').find('input').type('0000')
+    cy.dataCy('cardNumber').find('input').type('3213123123123123')
+    cy.dataCy('ExpirationPeriod').find('input').type('0327')
     cy.dataCy('cardPassword').find('input').type('12')
     cy.dataCy('CompanyRegistrationNumber').find('input').type('890903')
+    cy.dataCy('cardName').find('input').type('cypress-card')
+    cy.dataCy('IsIdentityComplete').find('[type="checkbox"]').check()
+
+    cy.dataCy('cardAdd').click()
+    cy.dataCy('dialogTitle').should('have.text', '유효하지 않은 카드')
+    cy.dataCy('alert-close').click()
+
+    cy.dataCy('cardNumber').find('input').clear().type('5531844005599999')
+    cy.dataCy('ExpirationPeriod').find('input').clear().type('0000')
+    cy.dataCy('cardPassword').find('input').clear().type('12')
+    cy.dataCy('CompanyRegistrationNumber').find('input').clear().type('890903')
     cy.dataCy('cardName').find('input').type('cypress-card')
     cy.dataCy('IsIdentityComplete').find('[type="checkbox"]').check()
 
@@ -156,10 +172,12 @@ describe('Testing the Commerce Member Page', () => {
     cy.dataCy('dialogTitle').should('have.text', '잘못된 유효기간')
     cy.dataCy('alert-close').click()
 
+    cy.dataCy('cardNumber').find('input').clear().type(cardNumber)
     cy.dataCy('ExpirationPeriod').find('input').clear().type('0327')
     cy.dataCy('cardAdd').click()
     cy.dataCy('snackbar').should('have.text', MSG.SUCCESS.SAVE_CARD)
 
+    //
     // 카드 삭제
     cy.wait('@cards').then(() => {
       cy.dataCy('cardDelete').first().click()
@@ -170,13 +188,14 @@ describe('Testing the Commerce Member Page', () => {
 
     // ============= 환급 계좌 Tab 테스트 시작 ===============
     cy.intercept({
-      url: RootPaymentPath + COMMERCE_PAYMENT_API_PATH.REFUND_ACCOUNT_BANK_LIST,
+      url: COMMERCE_PAYMENT_API_PATH.REFUND_ACCOUNT_BANK_LIST,
     }).as('bankList')
 
     cy.intercept({
-      url: RootPaymentPath + COMMERCE_PAYMENT_API_PATH.REFUND_ACCOUNT + '*',
+      url: COMMERCE_PAYMENT_API_PATH.REFUND_ACCOUNT + '*',
     }).as('refundAccountInfo')
     cy.visit(`/commerce/member/${memberUID}`)
+    cy.dataCy('subTitle').should('have.text', '회원 상세')
     // 환급 계좌 tab 수정 or 삭제
     // 환급 계좌 tab 선택
     cy.dataCy('refund-account').click()
@@ -221,7 +240,7 @@ describe('Testing the Commerce Member Page', () => {
       cy.dataCy('snackbar').should('have.text', MSG.SUCCESS.SAVE_REFUNDS)
     })
 
-    cy.get('@refundAccountInfo').should((res: any) => {
+    cy.wait('@refundAccountInfo').should((res: any) => {
       cy.dataCy('accountNumber')
         .find('input')
         .should('have.value', accountNumber)
@@ -231,14 +250,8 @@ describe('Testing the Commerce Member Page', () => {
     cy.wait('@refundAccountInfo').then((res: any) => {
       // cy.log(res, '#####')
       cy.wait(200).then(() => {
-        cy.dataCy('customerName')
-          .find('input')
-          .clear()
-          .type(customerName, { force: true })
-        cy.dataCy('accountNumber')
-          .find('input')
-          .clear()
-          .type(accountNumber2, { force: true })
+        cy.dataCy('customerName').find('input').clear().type(customerName)
+        cy.dataCy('accountNumber').find('input').clear().type(accountNumber2)
 
         cy.dataCy('bank')
           .click()
@@ -257,53 +270,5 @@ describe('Testing the Commerce Member Page', () => {
       })
     })
     // ============= 환급 계좌 Tab 테스트 종료 ===============
-  })
-
-  it('3. 카드 Tab 조회, 추가, 삭제 처리', () => {
-    // ============= 카드 Tab 테스트 시작 ===============
-    cy.intercept({
-      method: 'get',
-      url: RootPaymentPath + COMMERCE_PAYMENT_API_PATH.MEMBER_CREDIT_CARD + '*',
-    }).as('cards')
-    cy.visit(`/commerce/member/${memberUID}`)
-
-    // card List
-    // cy.wait('@cards').then((res) => {
-    //   console.log(res)
-    //   cy.debug()
-    // })
-
-    // 카드 추가
-    cy.dataCy('card').click()
-    cy.dataCy('cardAddDialog').click()
-
-    cy.dataCy('cardNumber').find('input').type('3213123123123123')
-    cy.dataCy('ExpirationPeriod').find('input').type('0327')
-    cy.dataCy('cardPassword').find('input').type('12')
-    cy.dataCy('CompanyRegistrationNumber').find('input').type('890903')
-    cy.dataCy('cardName').find('input').type('cypress-card')
-    cy.dataCy('IsIdentityComplete').find('[type="checkbox"]').check()
-
-    cy.dataCy('cardAdd').click()
-    cy.dataCy('dialogTitle').should('have.text', '유효하지 않은 카드')
-    cy.dataCy('alert-close').click()
-
-    cy.dataCy('cardNumber').find('input').clear().type(cardNumber)
-    // cy.dataCy('cardAdd').click()
-
-    // cy.dataCy('dialogTitle').should('have.text', '잘못된 유효기간')
-    // cy.dataCy('alert-close').click()
-
-    cy.dataCy('ExpirationPeriod').find('input').clear().type('0327')
-    cy.dataCy('cardAdd').click()
-    cy.dataCy('snackbar').should('have.text', MSG.SUCCESS.SAVE_CARD)
-
-    // 카드 삭제
-    cy.wait('@cards').then(() => {
-      cy.dataCy('cardDelete').first().click()
-      cy.dataCy('dialogDeleteButton').click()
-      cy.dataCy('snackbar').should('have.text', MSG.SUCCESS.DELETE_CARD)
-    })
-    // ============= 카드 Tab 테스트 종료 ===============
   })
 })

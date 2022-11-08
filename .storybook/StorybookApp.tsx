@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import NetworkService from '@api/NetworkService'
+import Instance from '@api/Instance'
 import CssBaseline from '@mui/material/CssBaseline'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '@queries/client'
@@ -17,7 +17,7 @@ export const StorybookApp = (
 ) => {
   useEffect(() => {
     // storybook token 주입
-    NetworkService.storybookTokenInject()
+    Instance.storybookTokenInject()
   }, [])
 
   return (

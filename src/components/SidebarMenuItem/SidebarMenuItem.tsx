@@ -26,7 +26,7 @@ function SidebarMenuItem({
 }
 
 const SingleMenu = ({
-  item: { to = '#', label },
+  item: { to = '#', label, target },
   sx,
 }: {
   item: SidebarMenuItemProps
@@ -34,7 +34,14 @@ const SingleMenu = ({
 }) => {
   const navigate = useNavigate()
   const isMatch = useMatch(to)
-  const handleClick = () => navigate(to)
+  const handleClick = () => {
+    if (target) {
+      window.open(to, target)
+    } else {
+      navigate(to)
+    }
+  }
+
   return (
     <ListItem disablePadding>
       <ListItemButton onClick={handleClick} selected={!!isMatch}>

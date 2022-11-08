@@ -9,3 +9,8 @@
 .MuiFormControl-marginNormal{
   margin: 12px !important;
 }
+
+.MuiTreeView-root {
+  padding: 20px 26px;
+  border: 1px solid #0000003B;
+}

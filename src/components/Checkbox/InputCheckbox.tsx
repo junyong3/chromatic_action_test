@@ -48,10 +48,15 @@ export default function InputCheckbox<TFieldValues extends FieldValues>(
     : helperText
 
   const handleChange = (index: number | string) => {
-    const newArray: (string | number)[] | any[] = [...value]
+    let val: Array<any> = []
+    if (value) {
+      val = value
+    }
+
+    const newArray: (string | number)[] | any[] = [...val]
 
     const exists =
-      value.findIndex((i: any) =>
+      val.findIndex((i: any) =>
         returnObject ? i[valueKey] === index : i === index
       ) === -1
     const isCheck = returnObject
@@ -60,7 +65,7 @@ export default function InputCheckbox<TFieldValues extends FieldValues>(
     const checkLabel = returnObject
       ? options.find((i) => i[valueKey] === index)[valueKey]
       : index
-    const allFindIndex = value.findIndex((i: any) =>
+    const allFindIndex = val.findIndex((i: any) =>
       returnObject ? i[valueKey] === 'all' : i === 'all'
     )
     const allcheckLabel = returnObject
@@ -80,7 +85,7 @@ export default function InputCheckbox<TFieldValues extends FieldValues>(
           )
         }
       } else {
-        if (options.length - 2 === value.length) {
+        if (options.length - 2 === val.length) {
           newArray.push(allcheckLabel)
         }
         newArray.push(isCheck)
@@ -118,16 +123,18 @@ export default function InputCheckbox<TFieldValues extends FieldValues>(
       <FormGroup row={row}>
         {options.map((option: any) => {
           const optionKey = option[valueKey]
-          if (!optionKey) {
+          if (typeof optionKey !== 'boolean' && !optionKey) {
             console.error(
               `CheckboxButtonGroup: valueKey ${valueKey} does not exist on option`,
               option
             )
           }
-          const isChecked =
-            value.findIndex((item: any) =>
-              returnObject ? item[valueKey] === optionKey : item === optionKey
-            ) !== -1
+
+          const isChecked = !value
+            ? false
+            : value.findIndex((item: any) =>
+                returnObject ? item[valueKey] === optionKey : item === optionKey
+              ) !== -1
           return (
             <FormControlLabel
               control={

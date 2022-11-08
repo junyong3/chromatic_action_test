@@ -1,8 +1,8 @@
-import Sidebar from '@src/compositions/Sidebar'
+import Sidebar from '@compositions/Sidebar'
 import { DRAWER_WIDTH } from '@config'
 import styled from '@emotion/styled'
 import { Outlet } from 'react-router-dom'
-import { SidebarProps } from '@src/compositions/Sidebar/Props'
+import { SidebarProps } from '@compositions/Sidebar/Props'
 
 function SidebarLayout({ menuList }: SidebarProps) {
   return (

@@ -8,6 +8,10 @@ export const ServerProxyInfo = (env: any) => {
       target: env.VITE_COMMERCE_MEMBER_URL,
       changeOrigin: true,
     },
+    '/admin/category': {
+      target: env.VITE_PRODUCT_URL,
+      changeOrigin: true,
+    },
     '^/admin/payment/.*': {
       target: env.VITE_PAYMENT_URL,
       changeOrigin: true,

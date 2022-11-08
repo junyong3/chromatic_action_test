@@ -53,7 +53,6 @@ export default function InputSwitch<TFieldValues extends FieldValues>(
           render={({ field }) => {
             return (
               <Switch
-                {...field}
                 size={size}
                 checked={!!field.value}
                 disabled={disabled}

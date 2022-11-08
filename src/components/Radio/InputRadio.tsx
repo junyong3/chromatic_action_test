@@ -91,13 +91,14 @@ export default function InputRadio<TFieldValues extends FieldValues>(
           />
         )}
         {options.map((option: any) => {
-          const optionKey = option[valueKey]
-          if (!optionKey) {
+          const optionKey = option[valueKey] ?? option
+          if (typeof optionKey !== 'boolean' && !optionKey) {
             console.error(
               `CheckboxButtonGroup: valueKey ${valueKey} does not exist on option`,
               option
             )
           }
+
           const isChecked =
             value &&
             (returnObject ? value[valueKey] === optionKey : value === optionKey)
@@ -113,7 +114,7 @@ export default function InputRadio<TFieldValues extends FieldValues>(
                 />
               }
               value={optionKey}
-              label={option[labelKey]}
+              label={option[labelKey] ?? option}
               key={optionKey}
               disabled={disabled}
             />

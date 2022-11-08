@@ -9,6 +9,21 @@ function CommerceLayout() {
         { label: '문의 관리', to: To.CommerceInquiry },
         { label: '공지 관리', to: To.CommerceNoticeList },
         { label: '리뷰 관리', to: To.CommerceReviewList },
+        {
+          label: '카테고리 관리',
+          subMenuList: [
+            {
+              label: '상품 카테고리 관리',
+              to: To.CommerceProductCategory,
+              target: '_blank',
+            },
+            {
+              label: '브랜드 카테고리 관리',
+              to: To.CommerceBrandCategory,
+              target: '_blank',
+            },
+          ],
+        },
         { label: '상품 관리', to: To.CommerceProductList },
         { label: '전시 관리', to: To.CommerceExhibit },
         { label: '검색 관리', to: To.CommerceSearch },

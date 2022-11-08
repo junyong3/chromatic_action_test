@@ -1,14 +1,14 @@
 import Button from '@components/Button'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 import { Address } from 'react-daum-postcode/lib/loadPostcode'
-import usePostCode from '@stores/postCode.store'
+import usePostCodeStore from '@stores/postCode.store'
 
 type PostCodePopupProps = {
   disabled?: boolean
 }
 function PostCodePopup(props: PostCodePopupProps) {
   const { disabled = false } = props
-  const setPostCode = usePostCode((state) => state.setPostCode)
+  const setPostCode = usePostCodeStore((state) => state.setPostCode)
   const open = useDaumPostcodePopup(
     'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
   )

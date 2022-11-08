@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import PostCodePopup from '@components/PopupPostCode/PostCodePopup'
-import usePostCode from '@stores/postCode.store'
+import usePostCodeStore from '@stores/postCode.store'
 import { Typography } from '@mui/material'
 
 export default {
@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof PostCodePopup>
 
 const Template: ComponentStory<typeof PostCodePopup> = (props) => {
-  const [address, zonecode] = usePostCode((state) => [
+  const [address, zonecode] = usePostCodeStore((state) => [
     state.address,
     state.zonecode,
   ])
@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof PostCodePopup> = (props) => {
     <>
       <PostCodePopup />
       <Typography>우편변호 : {zonecode}</Typography>
-      <Typography>상세주소 : {address}</Typography>
+      <Typography>주소 : {address}</Typography>
     </>
   )
 }

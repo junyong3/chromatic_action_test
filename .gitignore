@@ -25,8 +25,14 @@ dist-ssr
 !/.eslintrc.json
 
 # storybook
-#storybook-static
-
+storybook-static
+# env
+.env.local
 
 #ts
 tsconfig.tsbuildinfo
+/cypress.env.json
+
+#cypress
+/cypress/screenshots
+/cypress/videos

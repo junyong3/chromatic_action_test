@@ -15,7 +15,7 @@ import SearchFormRow from '@components/SearchFormRow'
 
 const Template: Story<SearchFormProp> = (args: SearchFormProp) => {
   const [searchType, setSearchType] = useState('')
-  const [searchText, setsearchText] = useState('')
+  const [searchText, setSearchText] = useState('')
   return (
     <StoriesWrap>
       <SearchForm
@@ -49,7 +49,7 @@ const Template: Story<SearchFormProp> = (args: SearchFormProp) => {
                 size="small"
                 placeholder="검색어를 입력하세요"
                 onChange={(event) => {
-                  setsearchText(event.target.value as string)
+                  setSearchText(event.target.value as string)
                 }}
                 fullWidth
               />

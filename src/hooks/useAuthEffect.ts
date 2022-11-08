@@ -1,5 +1,5 @@
 import { To } from '@routes/To'
-import NetworkService from '@api/NetworkService'
+import Instance from '@api/Instance'
 import { getItem, LocalStorageKey } from '@utils/storage/localStorage'
 import { useAuthStore } from '@stores/auth.store'
 import { useCallback, useEffect } from 'react'
@@ -42,14 +42,14 @@ function useAuthEffect() {
     }
 
     const { data } = await mutateAsync(
-      NetworkService.iam.post<RefreshTokenReq>(
+      Instance.post<RefreshTokenReq>(
         IAM_API_PATH.REFRESH_TOKENS,
         refreshTokenReqParams
       )
     )
 
-    NetworkService.setAccessToken(data.accessToken)
-    NetworkService.setRefreshToken(data.refreshToken)
+    Instance.setAccessToken(data.accessToken)
+    Instance.setRefreshToken(data.refreshToken)
 
     setLoggedEmail(data.username)
     setIsLoggedIn(true)
@@ -84,7 +84,7 @@ function useAuthEffect() {
           type: 'ERROR',
         },
       })
-      // setIsAuthEffectLoading(false)
+      setIsAuthEffectLoading(false)
     })
   }, [
     navigate,

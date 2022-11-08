@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { SearchFormItemProp } from './Props'
-import { ConditionWrap } from './StyleObj'
 import Typography from '@components/Typography'
+import { Stack } from '@mui/material'
 
 function SearchFormItem({
   label,
@@ -10,7 +10,7 @@ function SearchFormItem({
   children,
 }: PropsWithChildren<SearchFormItemProp>) {
   return (
-    <ConditionWrap>
+    <Stack direction={'row'} alignItems={'center'} width={'100%'}>
       <Typography
         required={required}
         variant={'subtitle2'}
@@ -18,10 +18,15 @@ function SearchFormItem({
       >
         {label}
       </Typography>
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+      <Stack
+        direction={'row'}
+        alignItems={'center'}
+        spacing={1}
+        sx={{ flex: 1 }}
+      >
         {children}
-      </div>
-    </ConditionWrap>
+      </Stack>
+    </Stack>
   )
 }
 

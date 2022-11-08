@@ -24,9 +24,9 @@
       "@config": ["src/config"],
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"],
+      "@domain/*": ["src/domain/*"],
       "@queries/*": ["src/queries/*"],
-      "@routes/*": ["src/app/viewPort/*"],
+      "@routes/*": ["src/routes/viewPort/*"],
       "@api/*": ["src/api/*"],
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
@@ -37,6 +37,6 @@
     }
   },
   "exclude": ["cypress.config.ts", "cypress", "node_modules"],
-  "include": ["src", "**/*.ts","**/*.tsx"],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

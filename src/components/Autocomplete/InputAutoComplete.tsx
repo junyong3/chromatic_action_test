@@ -64,7 +64,9 @@ function InputAutoComplete<T extends FieldValues>(
             ? (value || []).map((i: any) =>
                 options.find((j) => (j[optionKey.value] || j) === i)
               )
-            : options.find((i) => (i[optionKey.value] || i) === value) || null
+            : options.find(
+                (i) => (i[optionKey.value] || i) === value[optionKey.value]
+              ) || null
         }
         return (
           <Autocomplete

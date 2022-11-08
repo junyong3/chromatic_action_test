@@ -9,7 +9,8 @@ import {
   toolbarAddIcon,
 } from '@components/WYSIWYG/Quill/Options'
 import './style/custom-quill-style.css'
-import CustomQuill from '@components/WYSIWYG/Quill/CustomQuill'
+
+// import CustomQuill from '@components/WYSIWYG/Quill/CustomQuill'
 
 function EditorQuill(props: EditorQuillProps) {
   const {
@@ -55,7 +56,7 @@ function EditorQuill(props: EditorQuillProps) {
   }, [defaultEditorValue])
 
   return (
-    <CustomQuill
+    <ReactQuill
       style={{
         backgroundColor: '#fff',
       }}
@@ -69,7 +70,7 @@ function EditorQuill(props: EditorQuillProps) {
       modules={modules}
       formats={formats}
       readOnly={disable}
-    ></CustomQuill>
+    ></ReactQuill>
   )
 }
 

@@ -16,7 +16,7 @@ function ListHeader({ title, button, navigation, subText }: ListHeaderProps) {
             size="medium"
             startIcon={<AddIcon />}
             href={button.link}
-            data-sb-kind={button.sbKind}
+            data-sb-kind={button.sbkind}
             data-cy="addButton"
             disabled={button.isDisabled}
             target="_blank"

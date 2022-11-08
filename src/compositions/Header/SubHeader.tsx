@@ -15,45 +15,47 @@ function SubHeader({
   return (
     <div>
       <SubHeaderTitle>
-        <Typography variant={'h5'}>{title}</Typography>
+        <Typography data-cy={'subTitle'} variant={'h5'}>
+          {title}
+        </Typography>
         <Stack direction={'row'} alignItems={'center'} spacing={2}>
           {anotherButton.map(({ text, ...buttonProp }, index) => (
             <Button key={index} {...buttonProp}>
               {text}
             </Button>
           ))}
-          {deleteButton?.onClick ? (
+          {deleteButton ? (
             <Button
               {...deleteButton}
               color="gray"
               variant="outlined"
               size="medium"
               data-cy={'deleteButton'}
-              data-sb-kind={deleteButton.sbKind}
+              data-sb-kind={deleteButton.sbkind}
             >
               삭제
             </Button>
           ) : null}
-          {updateButton?.onClick ? (
+          {updateButton ? (
             <Button
               {...updateButton}
               variant="outlined"
               size="medium"
               sx={{ ml: 2 }}
               data-cy={'updateButton'}
-              data-sb-kind={updateButton.sbKind}
+              data-sb-kind={updateButton.sbkind}
             >
               수정
             </Button>
           ) : null}
-          {saveButton?.onClick ? (
+          {saveButton ? (
             <Button
               {...saveButton}
               variant="contained"
               size="medium"
               sx={{ ml: 2 }}
               data-cy={'saveButton'}
-              data-sb-kind={saveButton.sbKind}
+              data-sb-kind={saveButton.sbkind}
             >
               저장
             </Button>

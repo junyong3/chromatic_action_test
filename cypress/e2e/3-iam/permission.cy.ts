@@ -39,6 +39,7 @@ describe('Testing the Permissions', () => {
         cy.visit(href)
 
         // 권한 생성
+        cy.dataCy('subTitle').should('have.text', '권한 생성')
         cy.dataCy('name').type(name)
         cy.dataCy('desc').type(desc)
 
