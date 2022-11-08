@@ -22,7 +22,7 @@ const { loadEnv } = require('vite')
 
 module.exports = {
   stories: [
-    '../src/**/*.stories.mdx',
+    // '../src/**/*.stories.mdx',
     '../src/domain/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
