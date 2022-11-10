@@ -20,7 +20,7 @@ on:
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ubuntu-latest, ARM64]
     strategy:
       matrix:
         node-version: [ 16 ]
