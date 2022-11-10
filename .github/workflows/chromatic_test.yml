@@ -17,15 +17,6 @@ on:
 # on:
 #   pull_request_target:
 #     types: [labeled]
-  # 👇 Adds Chromatic as a job
-chromatic_publish:
-  stage: test
-  # 👇 Runs Chromatic with the flag to compress the build output.
-  script:
-    - pnpm dlx chromatic --project-token=d2a79ac5d852 --zip
-
-
-
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
@@ -82,22 +73,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: chromatic:pnpm call
-        run: pnpm chromatic:pnpm
+#      - name: chromatic:pnpm call
+#        run: pnpm chromatic:pnpm
 
-#      - name: Publish to Chromatic
-#        uses: chromaui/action@v1
-#        with:
-#          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
-#          token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
-##          token: ${{ github.event.pull_request.head.sha }}
-##         workingDir: jyg-village-hall
-##          exitOnceUploaded: true
-##          onlyChanged: true
-##          traceChanged: true
-##          buildScriptName: build-storybook
-##          exitZeroOnChanges: true
-##          diagnostics: true
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_JYG_TOKEN }}
+          token: ${{ secrets.TEST_GIT_REPO_TOKEN }}
+          zip: true
+#          token: ${{ github.event.pull_request.head.sha }}
+#         workingDir: jyg-village-hall
+#          exitOnceUploaded: true
+#          onlyChanged: true
+#          traceChanged: true
+#          buildScriptName: build-storybook
+#          exitZeroOnChanges: true
+#          diagnostics: true
 ####     if: contains(github.event.pull_request.labels.*.name, 'storybook')
 
     outputs:
