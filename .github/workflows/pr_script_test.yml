@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: [self-hosted, ubuntu-latest, ARM64]
+    runs-on: [self-hosted, ARM64]
     strategy:
       matrix:
         node-version: [ 16 ]
