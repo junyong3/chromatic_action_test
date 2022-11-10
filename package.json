@@ -92,5 +92,10 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "fork-ts-checker": {
+    "typescript": {
+      "memoryLimit": 4096
+    }
   }
 }
