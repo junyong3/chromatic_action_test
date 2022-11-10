@@ -27,7 +27,7 @@ dist-ssr
 # storybook
 storybook-static
 # env
-.env.local
+../jyg-village-hall/.env.local
 
 #ts
 tsconfig.tsbuildinfo
