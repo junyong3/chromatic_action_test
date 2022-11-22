@@ -20,8 +20,9 @@ on:
 jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
+    runs-on: [macos-12]
 #    runs-on: [self-hosted, ARM64]
-    runs-on: [self-hosted, Linux, X64 ,label-1]
+#    runs-on: [self-hosted, Linux, X64 ,label-1]
     env:
       NODE_OPTIONS: '--max_old_space_size=4096'
     strategy:
