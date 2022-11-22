@@ -21,7 +21,7 @@ jobs:
   chromatic-deployment:
     name: Deploy Storybook to chromatic
 #    runs-on: [self-hosted, ARM64]
-    runs-on: [macos-12]
+    runs-on: [self-hosted, Linux, X64 ,label-1]
     strategy:
       matrix:
         node-version: [ 16 ]
