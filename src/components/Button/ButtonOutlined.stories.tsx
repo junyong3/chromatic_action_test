@@ -11,12 +11,12 @@ const Template: Story<ButtonProps> = (args: ButtonProps) => {
         <Button {...args}>controls</Button>
       </div>
       <div className={'button-card'}>
-        <Button {...args} size={'small'}>
+        <Button {...args} size={'medium'}>
           Small
         </Button>
       </div>
       <div className={'button-card'}>
-        <Button {...args} size={'medium'}>
+        <Button {...args} size={'small'}>
           Medium
         </Button>
       </div>
@@ -26,7 +26,7 @@ const Template: Story<ButtonProps> = (args: ButtonProps) => {
         </Button>
       </div>
       <div className={'button-card'}>
-        <Button {...args} size={'medium'} disabled>
+        <Button {...args} size={'large'} disabled>
           disabled
         </Button>
       </div>
